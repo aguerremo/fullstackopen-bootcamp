@@ -64,12 +64,13 @@ app.delete('/api/persons/:id', (request, response) => {
 
 app.post('/api/persons/', (request, response) => {
     const person = request.body
-    maxId = persons.length
+    newId = Math.floor(Math.random() * 100)
+    
 
     const newCourse ={
-        id: maxId + 1,
+        id: newId,
         name: person.name,
-        exerci
+        number: person.number
 
     }
 })
