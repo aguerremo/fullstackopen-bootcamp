@@ -9,6 +9,9 @@ const App = () => {
   const [newName, setNewName] = useState('')
   const [newNumber, setNewNumber] = useState('')
   const [showAll, setShowAll] = useState('')
+  const [doneMessage, setDoneMessage] = useState(null)
+  const [errorMessage, setErrorMessage] = useState(null)
+
 
 
 
@@ -36,8 +39,8 @@ console.log('render', persons.length, 'persons');
   return (
     <div>
       <Filter setShowAll={setShowAll}/>
-
-      <AddPerson persons={persons} newName={newName} newNumber={newNumber} setNewName={setNewName} setPersons={setPersons} setNewNumber={setNewNumber}/>
+            
+      <AddPerson errorMessage={errorMessage} setErrorMessage={setErrorMessage} doneMessage={doneMessage} setDoneMessage={setDoneMessage} persons={persons} newName={newName} newNumber={newNumber} setNewName={setNewName} setPersons={setPersons} setNewNumber={setNewNumber}/>
       
       <Person personToShow={personToShow} setPersons={setPersons}/>
     </div>
