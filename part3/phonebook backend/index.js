@@ -5,6 +5,9 @@ const app = express()
 
 app.use(express.json())
 
+const logger = require('./modules/')
+app.use(logger)
+
 
 let persons =[
     { 
@@ -32,8 +35,8 @@ let persons =[
 
 
 app.get('/info', (request, response) => {
-    numberOfPersons = persons.length
-    requestDate = new Date()
+    const numberOfPersons = persons.length
+    const requestDate = new Date()
 
     response.send('<p>Phonebook has info for '+ numberOfPersons +' people</p>'+ requestDate) 
 })
@@ -64,19 +67,41 @@ app.delete('/api/persons/:id', (request, response) => {
 
 app.post('/api/persons/', (request, response) => {
     const person = request.body
-    newId = Math.floor(Math.random() * 100)
-    
+    const newId = Math.floor(Math.random() * 1000)
 
-    const newCourse ={
+    const personExist = persons.find(p => p.name === person.name)
+    const numberExist = persons.find(p => p.number === person.number)
+
+    const newPerson = {
         id: newId,
         name: person.name,
         number: person.number
 
     }
+    if (personExist || numberExist){
+        return response.status(400).json({
+            error: 'name or number must be unique'
+        })
+
+    } else if (newPerson.name === undefined || newPerson.number===undefined){ 
+        return response.status(400).json({
+            error: 'name or number must be defined'
+        })
+   
+    } else {
+        persons = [...persons, newPerson]
+        response.json(persons)
+    }
+})
+
+app.use((request, response) => {
+    response.status(400).json({
+        error: "Not found"
+    })
 })
 
 
-const PORT = 3001
+const PORT = process.env.PORT || 3001
 app.listen(PORT, () => {
     console.log(`Server running on port ${PORT}`);
 })
