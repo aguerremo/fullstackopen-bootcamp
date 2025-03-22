@@ -5,7 +5,7 @@ const app = express()
 
 app.use(express.json())
 
-const logger = require('./modules/')
+const logger = require('./modules/logger')
 app.use(logger)
 
 
