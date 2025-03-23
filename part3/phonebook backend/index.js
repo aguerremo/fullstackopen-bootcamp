@@ -6,6 +6,7 @@
 const express = require('express')
 const app = express()
 
+//Middleware that show the static content of "dist"
 app.use(express.static('dist')) 
 app.use(express.json())
 
@@ -14,7 +15,6 @@ app.use(express.json())
 const cors = require('cors') 
 app.use(cors())
 
-//Middleware that show the static content of "dist"
 
 //Import the module logger from ./modules/logger 
 const logger = require('./modules/logger')
