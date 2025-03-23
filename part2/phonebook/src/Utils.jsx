@@ -66,7 +66,7 @@ export const addPersonHandler = ({persons ,newName, newNumber, setNewName, setPe
         }
     } else {
 
-      const newPerson = {name: newName, number: newNumber, id: (persons.length + 1).toString()}
+      const newPerson = {name: newName, number: newNumber}
       personService.create(newPerson)
         .then(response => {
           console.log('succes!');

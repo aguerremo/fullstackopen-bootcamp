@@ -1,10 +1,22 @@
 //npm install express
 //npm install nodemon -D
+
+
+//Express facilitates server-side development
 const express = require('express')
 const app = express()
 
+app.use(express.static('dist')) 
 app.use(express.json())
 
+
+//Allow request from all origins
+const cors = require('cors') 
+app.use(cors())
+
+//Middleware that show the static content of "dist"
+
+//Import the module logger from ./modules/logger 
 const logger = require('./modules/logger')
 app.use(logger)
 
@@ -90,7 +102,7 @@ app.post('/api/persons/', (request, response) => {
    
     } else {
         persons = [...persons, newPerson]
-        response.json(persons)
+        response.json(newPerson)
     }
 })
 
