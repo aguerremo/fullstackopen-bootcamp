@@ -1,25 +1,23 @@
 //npm install express
 //npm install nodemon -D
-
+//npm install morgan
+//npm install mongodb
+//npm install mongoose
 
 //Express facilitates server-side development
 const express = require('express')
 const app = express()
+const morgan = require('morgan')
 
 //Middleware that show the static content of "dist"
 app.use(express.static('dist')) 
 app.use(express.json())
 
+app.use(morgan(':method :url :status :res[content-length] - :response-time ms'))
 
 //Allow request from all origins
 const cors = require('cors') 
 app.use(cors())
-
-
-//Import the module logger from ./modules/logger 
-const logger = require('./modules/logger')
-app.use(logger)
-
 
 let persons =[
     { 
@@ -43,8 +41,6 @@ let persons =[
       "number": "39-23-6423122"
     }
 ]
-  
-
 
 app.get('/info', (request, response) => {
     const numberOfPersons = persons.length
@@ -52,7 +48,6 @@ app.get('/info', (request, response) => {
 
     response.send('<p>Phonebook has info for '+ numberOfPersons +' people</p>'+ requestDate) 
 })
-
 
 app.get('/api/persons', (request, response) => {
     
@@ -104,6 +99,9 @@ app.post('/api/persons/', (request, response) => {
         persons = [...persons, newPerson]
         response.json(newPerson)
     }
+     
+        console.log(JSON.stringify(newPerson))
+        
 })
 
 app.use((request, response) => {
@@ -111,7 +109,6 @@ app.use((request, response) => {
         error: "Not found"
     })
 })
-
 
 const PORT = process.env.PORT || 3001
 app.listen(PORT, () => {
