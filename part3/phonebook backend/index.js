@@ -55,10 +55,12 @@ let persons =[]
 
 // GET INFO
 app.get('/info', (request, response) => {
-    
-    const requestDate = new Date()
+    Person.countDocuments({})
+        .then(count => {
+        const requestDate = new Date()
+        response.send('<p>Phonebook has info for ' + count +' people</p>'+ requestDate) 
+    })
 
-    response.send('<p>Phonebook has info for ' +' people</p>'+ requestDate) 
 })
 
 // GET PERSONS
