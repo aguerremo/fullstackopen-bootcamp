@@ -3,38 +3,13 @@
 //npm install morgan
 //npm install mongodb
 //npm install mongoose
+//npm install dotenv
 
 //env
 require('dotenv').config()
 
 //Mongoose
-const mongoose = require('mongoose')
-const url = process.env.MONGODB_URI
-
-mongoose.set('strictQuery',false)
-mongoose.connect(url).then(result => {
-    console.log('connected to MongoDB')
-  })
-  .catch(error => {
-    console.log('error connecting to MongoDB:', error.message)
-  })
-
-//Create the mongoose Schema
-const personSchema = new mongoose.Schema({
-  name: String,
-  number: Number,
-})
-
-personSchema.set('toJSON', {
-    transform: (document, returnedObject) => {
-        returnedObject.id = returnedObject._id,
-        delete returnedObject._id
-        delete returnedObject.__v
-    }}
-)
-
-//Create the Objet Person with mongoose model
-const Person = mongoose.model('Person', personSchema)
+const Person = require('./models/models')
 
 //Express facilitates server-side development
 const express = require('express')
@@ -51,9 +26,7 @@ app.use(morgan(':method :url :status :res[content-length] - :response-time ms'))
 const cors = require('cors') 
 app.use(cors())
 
-let persons =[]
-
-// GET INFO
+// GET INFO ---
 app.get('/info', (request, response) => {
     Person.countDocuments({})
         .then(count => {
@@ -63,7 +36,7 @@ app.get('/info', (request, response) => {
 
 })
 
-// GET PERSONS
+// GET PERSONS ---
 app.get('/api/persons', (request, response) => {
     Person.find({})
   .then(persons => {
@@ -71,8 +44,8 @@ app.get('/api/persons', (request, response) => {
     })
 })  
 
-// GET PERSONS BY ID
-app.get('/api/persons/:id', (request, response) => {
+// GET PERSONS BY ID ---
+app.get('/api/persons/:id', (request, response, next) => {
     const id = request.params.id
     Person.findById(id)
     .then(person => {
@@ -81,61 +54,57 @@ app.get('/api/persons/:id', (request, response) => {
         } else {
             response.status(404).end()
         }
+    }).catch(err => {
+        next(err)
     })  
 })
 
-// DELETE PERSONS
+// DELETE PERSONS ---
 app.delete('/api/persons/:id', (request, response) => {
-    const id = Number(request.params.id)
-    persons = persons.filter(person => person.id !==id)
-
-    response.status(204).end()
+    const id = request.params.id
+    Person.deleteOne({_id:id})
+    .then(result => {
+        response.status(204).end()
+    })
 })  
 
-// POST PERSONS
-app.post('/api/persons/', (request, response) => {
-    const person = request.body
-    
+// POST PERSONS ---
+app.post('/api/persons', (request, response) => {
+    const person = request.body 
 
-    const personExist = persons.find(p => p.name === person.name)
-    const numberExist = persons.find(p => p.number === person.number)
+    if (!person.name || !person.number){
+        return response.status(400).json({
+            error: 'required "content" field is missing'
+        })
+    } 
 
     const newPerson = new Person({
         name: person.name,
         number: person.number
     })
 
-    newPerson.save().then(savedPerson => {
+    newPerson.save()
+    .then(savedPerson => {
         response.json(savedPerson)
     })
-
-    if (personExist || numberExist){
-        return response.status(400).json({
-            error: 'name or number must be unique'
-        })
-
-    } else if (newPerson.name === undefined || newPerson.number===undefined){ 
-        return response.status(400).json({
-            error: 'name or number must be defined'
-        })
-   
-    } else {
-        persons = [...persons, newPerson]
-        response.json(newPerson)
-    }
-     
         console.log(JSON.stringify(newPerson))
-        
-})
+    })
 
-// REQUEST NOT FOUND
+
+// REQUEST NOT FOUND 
 app.use((request, response) => {
     response.status(400).json({
         error: "Not found"
     })
 })
 
-// PORT CONNECTION
+app.use((error, request, response, next) => {
+     console.log(error)
+     console.log(error.name)
+     response.status(400).end()
+})
+
+// PORT CONNECTION ---
 const PORT = process.env.PORT
 app.listen(PORT, () => {
     console.log(`Server running on port ${PORT}`);
