@@ -27,21 +27,21 @@ const cors = require('cors')
 app.use(cors())
 
 // GET INFO ---
-app.get('/info', (request, response) => {
+app.get('/info', (request, response, next) => {
     Person.countDocuments({})
         .then(count => {
         const requestDate = new Date()
         response.send('<p>Phonebook has info for ' + count +' people</p>'+ requestDate) 
-    })
+    }).catch(error => next(error))
 
 })
 
 // GET PERSONS ---
-app.get('/api/persons', (request, response) => {
+app.get('/api/persons', (request, response, next) => {
     Person.find({})
   .then(persons => {
     response.json(persons)  
-    })
+    }).catch(error => next(error))
 })  
 
 // GET PERSONS BY ID ---
@@ -60,16 +60,16 @@ app.get('/api/persons/:id', (request, response, next) => {
 })
 
 // DELETE PERSONS ---
-app.delete('/api/persons/:id', (request, response) => {
+app.delete('/api/persons/:id', (request, response, next) => {
     const id = request.params.id
     Person.deleteOne({_id:id})
-    .then(result => {
+    .then(() => {
         response.status(204).end()
-    })
+    }).catch(error => next(error))
 })  
 
 // POST PERSONS ---
-app.post('/api/persons', (request, response) => {
+app.post('/api/persons', (request, response, next) => {
     const person = request.body 
 
     if (!person.name || !person.number){
@@ -86,7 +86,7 @@ app.post('/api/persons', (request, response) => {
     newPerson.save()
     .then(savedPerson => {
         response.json(savedPerson)
-    })
+    }).catch(error => next(error))
         console.log(JSON.stringify(newPerson))
     })
 
@@ -98,10 +98,14 @@ app.use((request, response) => {
     })
 })
 
-app.use((error, request, response, next) => {
-     console.log(error)
-     console.log(error.name)
+app.use((error, request, response) => {
+    console.log(error); 
+    console.log(error.name)
+    if(error.name === 'CastError'){
      response.status(400).end()
+    } else {
+        response.status(500).end()
+    }
 })
 
 // PORT CONNECTION ---
