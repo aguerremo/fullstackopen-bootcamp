@@ -4,7 +4,7 @@ import personService from "./services/persons"
 export const addPersonHandler = ({persons ,newName, newNumber, setNewName, setPersons, setNewNumber, setDoneMessage, setErrorMessage}) =>{
 
     const existingPerson = persons.find(person => person.name ===newName)
-    const existingNumber = persons.find(person => person.number ===newNumber)
+    const existingNumber = persons.find(person => person.number ===Number(newNumber))
 
     const removeDoneNotification = () => {
       setTimeout(() => {
@@ -40,9 +40,11 @@ export const addPersonHandler = ({persons ,newName, newNumber, setNewName, setPe
             removeErrorNotification()
           })
          
+        } else {
+          alert('Actualización cancelada')
         }
         
-      } else if 
+      } else if
       (existingNumber) {
         if (window.confirm('El número ' + newNumber + ' ya está asociado a otro contacto. ¿Desea actualizar el nombre del contacto?')) {
           const updatedPerson = {...existingNumber, name: newName}
@@ -63,6 +65,8 @@ export const addPersonHandler = ({persons ,newName, newNumber, setNewName, setPe
             setErrorMessage('La información del contacto ' + newNumber + ' ha sido eliminada del servidor.' )
             removeErrorNotification()
           })
+        }else {
+          alert('Actualización cancelada')
         }
     } else {
 

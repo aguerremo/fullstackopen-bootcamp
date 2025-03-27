@@ -77,9 +77,9 @@ app.put('/api/persons/:id', (request, response, next) => {
     .then(existingNamePerson => { //Add this person to existingPerson
         console.log("Persona encontrada", existingNamePerson);
         
-    // Person.findOne({ number: person.number }) //Find a person with the same name
-    // .then(existingNumberPerson => { //Add this person to existingPerson
-    //     console.log("Persona encontrada", existingNumberPerson);
+    Person.findOne({ number: person.number }) //Find a person with the same name
+    .then(existingNumberPerson => { //Add this person to existingPerson
+        console.log("Persona encontrada", existingNumberPerson);
         
         if (existingNamePerson) { //If existingPerson = true
             Person.findOneAndUpdate( //Find Person with
@@ -91,22 +91,22 @@ app.put('/api/persons/:id', (request, response, next) => {
                 response.json({updatedPersonName}) 
             }).catch(error => next(error))
         } 
-        // else if (existingNumberPerson) { 
-        // Person.findOneAndUpdate(
-        //         {number: person.number}, 
-        //         {name: person.name}, 
-        //         {new: true} 
-        //     ).then(updatedPersonNumber => {
-        //         console.log("Persona actualizada", updatedPersonNumber);
-        //         response.json({updatedPersonNumber}) 
-        //     }).catch(error => next(error))
-        else {
+        else if (existingNumberPerson) { 
+        Person.findOneAndUpdate(
+                {number: person.number}, 
+                {name: person.name}, 
+                {new: true} 
+            ).then(updatedPersonNumber => {
+                console.log("Persona actualizada", updatedPersonNumber);
+                response.json({updatedPersonNumber}) 
+            }).catch(error => next(error))
+         } else {
             response.status(404).json({error:"Persona no encontrada"})
         }
         }).catch(error => next(error))
      } )
 
-// })
+})
 
 
 // POST PERSONS ---
