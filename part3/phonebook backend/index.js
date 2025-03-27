@@ -73,7 +73,7 @@ app.put('/api/persons/:id', (request, response, next) => {
     const person = request.body //Add the request content to person
     console.log("Persona creada", person);
 
-    Person.findOne({ name: person.name , number: person.number}) //Find a person with the same name
+    Person.findOne({ name: person.name }) //Find a person with the same name
     .then(existingNamePerson => { //Add this person to existingPerson
         console.log("Persona encontrada", existingNamePerson);
         
@@ -83,12 +83,12 @@ app.put('/api/persons/:id', (request, response, next) => {
         
         if (existingNamePerson) { //If existingPerson = true
             Person.findOneAndUpdate( //Find Person with
-                {name: person.name , number: person.number}, //{filter} same name like person.name
-                {name: person.name ,number: person.number}, //{update} the number with the person.number
+                {name: person.name }, //{filter} same name like person.name
+                {number: person.number}, //{update} the number with the person.number
                 {new: true} //{return the new value}
             ).then(updatedPersonName => {
                 console.log("Persona actualizada", updatedPersonName);
-                response.json({updatedPersonName}) 
+                response.json(updatedPersonName) 
             }).catch(error => next(error))
         } 
         else if (existingNumberPerson) { 
@@ -98,7 +98,7 @@ app.put('/api/persons/:id', (request, response, next) => {
                 {new: true} 
             ).then(updatedPersonNumber => {
                 console.log("Persona actualizada", updatedPersonNumber);
-                response.json({updatedPersonNumber}) 
+                response.json(updatedPersonNumber) 
             }).catch(error => next(error))
          } else {
             response.status(404).json({error:"Persona no encontrada"})
