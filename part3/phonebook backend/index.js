@@ -68,6 +68,47 @@ app.delete('/api/persons/:id', (request, response, next) => {
     }).catch(error => next(error))
 })  
 
+// PUT PERSON
+app.put('/api/persons/:id', (request, response, next) => {
+    const person = request.body //Add the request content to person
+    console.log("Persona creada", person);
+
+    Person.findOne({ name: person.name , number: person.number}) //Find a person with the same name
+    .then(existingNamePerson => { //Add this person to existingPerson
+        console.log("Persona encontrada", existingNamePerson);
+        
+    // Person.findOne({ number: person.number }) //Find a person with the same name
+    // .then(existingNumberPerson => { //Add this person to existingPerson
+    //     console.log("Persona encontrada", existingNumberPerson);
+        
+        if (existingNamePerson) { //If existingPerson = true
+            Person.findOneAndUpdate( //Find Person with
+                {name: person.name , number: person.number}, //{filter} same name like person.name
+                {name: person.name ,number: person.number}, //{update} the number with the person.number
+                {new: true} //{return the new value}
+            ).then(updatedPersonName => {
+                console.log("Persona actualizada", updatedPersonName);
+                response.json({updatedPersonName}) 
+            }).catch(error => next(error))
+        } 
+        // else if (existingNumberPerson) { 
+        // Person.findOneAndUpdate(
+        //         {number: person.number}, 
+        //         {name: person.name}, 
+        //         {new: true} 
+        //     ).then(updatedPersonNumber => {
+        //         console.log("Persona actualizada", updatedPersonNumber);
+        //         response.json({updatedPersonNumber}) 
+        //     }).catch(error => next(error))
+        else {
+            response.status(404).json({error:"Persona no encontrada"})
+        }
+        }).catch(error => next(error))
+     } )
+
+// })
+
+
 // POST PERSONS ---
 app.post('/api/persons', (request, response, next) => {
     const person = request.body 
@@ -91,7 +132,8 @@ app.post('/api/persons', (request, response, next) => {
     })
 
 
-// REQUEST NOT FOUND 
+
+// REQUEST NOT FOUND ---
 app.use((request, response) => {
     response.status(400).json({
         error: "Not found"
