@@ -85,7 +85,7 @@ app.put('/api/persons/:id', (request, response, next) => {
             Person.findOneAndUpdate( //Find Person with
                 {name: person.name }, //{filter} same name like person.name
                 {number: person.number}, //{update} the number with the person.number
-                {new: true} //{return the new value}
+                {new: true, runValidators:true, context:'query'} //{return the new value}
             ).then(updatedPersonName => {
                 console.log("Persona actualizada", updatedPersonName);
                 response.json(updatedPersonName) 
@@ -95,7 +95,7 @@ app.put('/api/persons/:id', (request, response, next) => {
         Person.findOneAndUpdate(
                 {number: person.number}, 
                 {name: person.name}, 
-                {new: true} 
+                {new: true, runValidators:true, context:'query'} 
             ).then(updatedPersonNumber => {
                 console.log("Persona actualizada", updatedPersonNumber);
                 response.json(updatedPersonNumber) 
@@ -113,7 +113,7 @@ app.put('/api/persons/:id', (request, response, next) => {
 app.post('/api/persons', (request, response, next) => {
     const person = request.body 
 
-    if (!person.name || !person.number){
+    if (person.name === undefined || person.number === undefined){
         return response.status(400).json({
             error: 'required "content" field is missing'
         })
@@ -144,9 +144,9 @@ app.use((error, request, response) => {
     console.log(error); 
     console.log(error.name)
     if(error.name === 'CastError'){
-     response.status(400).end()
-    } else {
-        response.status(500).end()
+     response.status(400).send({error: 'malformatted id'})
+    } else if (error.name === 'ValidationError'){
+     response.status(400).json({error: error.message})
     }
 })
 

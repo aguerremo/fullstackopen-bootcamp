@@ -13,8 +13,6 @@ const App = () => {
   const [errorMessage, setErrorMessage] = useState(null)
 
 
-
-
 console.log('render', persons.length, 'persons');
 
   const personToShow = showAll

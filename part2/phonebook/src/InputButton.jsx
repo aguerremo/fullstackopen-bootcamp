@@ -6,7 +6,7 @@ export const InputButton = ({setNewName, setNewNumber, newName, newNumber}) => {
       }
     const handleNumberChange = (event) => {
         console.log(event.target.value);
-        setNewNumber(event.target.value)
+        setNewNumber(String(event.target.value))
        
       }
     return<div>

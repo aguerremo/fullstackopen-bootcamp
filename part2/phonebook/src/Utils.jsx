@@ -4,7 +4,7 @@ import personService from "./services/persons"
 export const addPersonHandler = ({persons ,newName, newNumber, setNewName, setPersons, setNewNumber, setDoneMessage, setErrorMessage}) =>{
 
     const existingPerson = persons.find(person => person.name ===newName)
-    const existingNumber = persons.find(person => person.number ===Number(newNumber))
+    const existingNumber = persons.find(person => person.number ===newNumber)
 
     const removeDoneNotification = () => {
       setTimeout(() => {

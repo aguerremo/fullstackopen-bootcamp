@@ -7,10 +7,7 @@ export const AddPerson = ({persons ,newName, newNumber, setNewName, setPersons, 
     const addPerson = (event) => {
       event.preventDefault()
       addPersonHandler({persons, setPersons, newName, newNumber, setNewName, setNewNumber, setDoneMessage ,setErrorMessage});
-    }
-    
-   
-        
+    }    
 
     return <div>
     <h2>add a new</h2>
