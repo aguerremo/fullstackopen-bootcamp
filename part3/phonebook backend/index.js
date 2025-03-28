@@ -112,7 +112,7 @@ app.put('/api/persons/:id', (request, response, next) => {
 app.post('/api/persons', (request, response, next) => {
   const person = request.body
 
-  if (person.name === undefined || person.number === undefined){
+  if (!person.name === undefined || person.number === undefined){
     return response.status(400).json({
       error: 'required "content" field is missing'
     })
