@@ -33,7 +33,6 @@ app.get('/info', (request, response, next) => {
       const requestDate = new Date()
       response.send('<p>Phonebook has info for ' + count +' people</p>'+ requestDate)
     }).catch(error => next(error))
-
 })
 
 // GET PERSONS ---

@@ -19,7 +19,7 @@ const personSchema = new mongoose.Schema({
 
   name: {
     type: String,
-    required: [true, 'Phone number required'],
+    required: [true, 'Name required'],
     minLength: 1
   }
   , number:{
