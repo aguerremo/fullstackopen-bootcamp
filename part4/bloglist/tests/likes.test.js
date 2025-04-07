@@ -30,7 +30,7 @@ const blogs = [
   {
     _id: "5a422b891b54a676234d17fa",
     title: "First class tests",
-    author: "Robert C. Martin",
+    author: "Edsger W. Dijkstra",
     url: "http://blog.cleancoder.com/uncle-bob/2017/05/05/TestDefinitions.htmll",
     likes: 10,
     __v: 0

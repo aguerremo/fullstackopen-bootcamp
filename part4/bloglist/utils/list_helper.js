@@ -71,8 +71,28 @@ const favouriteBlog = (blogs) => {
   
 }
 
+
+// CONTINUE LATER =================> Exercise 4.6
+
+// const mostBlogs = (blogs) => {
+//   const authorCount = blogs.reduce((acc, blog) => {
+//     acc[blog.author] = (acc[blog.author] || 0) + 1;
+//     return acc
+//   }, {}); 
+
+
+
+//   console.log(authorCount); 
+//   return authorCount;
+// };
+
+/
+
+mostBlogs(blogs)
+
 module.exports = {
   dummy,
   totalLikes,
-  favouriteBlog
+  favouriteBlog,
+  mostBlogs
 }
