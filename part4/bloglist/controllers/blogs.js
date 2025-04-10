@@ -20,23 +20,25 @@ blogsRouter.get('/:id', (request, response, next) => {
     .catch(error => next(error))
 })
 
-blogsRouter.post('/', (request, response, next) => {
+blogsRouter.post('/', async (request, response, next) => {
   const body = request.body
 
   
     const blog = new Blog({
-      content: body.content,
+      title: body.title,
+      author: body.author,
+      url: body.url,
+      likes: body.likes
     })
-  
-    blog.save()
-      .then(savedBlog => {
-        response.json(savedBlog)
-      })
-      .catch(error => next(error))
-  
+    try {
+      const savedBlog = await blog.save()
+      response.json(savedBlog)
+    } catch (error) {
+        next(error)
+    }
 
-  
 })
+
 
 blogsRouter.delete('/:id', (request, response, next) => {
   Blog.findByIdAndDelete(request.params.id)

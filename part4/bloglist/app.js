@@ -7,11 +7,13 @@ const blogsRouter = require('./controllers/blogs')
 const logger = require('./utils/logger')
 const middleware = require('./utils/middleware')
 
+//Gg8v2mc8VkOeWNt4
+
 mongoose.set('strictQuery', false)
 
 logger.info('strictQuery', false)
 
-mongoose.connect(config.MONGODB_URI).then(() => {
+mongoose.connect(config.MONGO_DB_URI).then(() => {
   logger.info('connected to MongoDB')
 })
 .catch((error) => {
