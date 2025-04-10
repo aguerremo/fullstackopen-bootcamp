@@ -34,7 +34,7 @@ beforeEach(async () => {
 
 
 
-test.only('blogs added succesfully', async () => {
+test('blogs added succesfully', async () => {
   const newBlog = {
     title: 'Prueba post 3',
     author: 'Author prueba 3',
@@ -47,6 +47,9 @@ test.only('blogs added succesfully', async () => {
     .send(newBlog)
     .expect(200)
     .expect('Content-Type', /application\/json/)
+
+    const response = await api.get('/api/blogs')
+    assert.strictEqual(response.body.length, initialBlogs.length + 1)
 
 })
 
@@ -62,7 +65,7 @@ test('blogs have id property instead of _id', async () => {
 
 
 
-test.only('blogs are returned at JSON', async () => {
+test('blogs are returned at JSON', async () => {
   await api
     .get('/api/blogs')
     .expect(200)
