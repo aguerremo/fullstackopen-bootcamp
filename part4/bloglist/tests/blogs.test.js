@@ -5,7 +5,6 @@ const app = require('../app')
 const assert = require('node:assert')
 const Blog = require('../models/blog')
 
-
 const api = supertest(app)
 
 const initialBlogs = [
@@ -33,6 +32,8 @@ beforeEach(async () => {
   await blog2.save()
 })
 
+
+
 test.only('blogs added succesfully', async () => {
   const newBlog = {
     title: 'Prueba post 3',
@@ -49,6 +50,18 @@ test.only('blogs added succesfully', async () => {
 
 })
 
+
+
+test('blogs have id property instead of _id', async () => {
+  const response = await api.get('/api/blogs')
+
+ response.body.forEach(blog =>{
+  assert.ok(blog.id)
+ })
+})
+
+
+
 test.only('blogs are returned at JSON', async () => {
   await api
     .get('/api/blogs')
@@ -56,11 +69,15 @@ test.only('blogs are returned at JSON', async () => {
     .expect('Content-Type', /application\/json/)
 })
 
+
+
 test('there are two blogs', async () => {
   const response = await api.get('/api/blogs')
 
   assert.strictEqual(response.body.length, initialBlogs.length)
 })
+
+
 
 test('the first blog is about pruebas', async () => {
   const response = await api.get('/api/blogs')
