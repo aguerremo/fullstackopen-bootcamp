@@ -4,6 +4,7 @@ const supertest = require('supertest')
 const app = require('../app')
 const assert = require('node:assert')
 const Blog = require('../models/blog')
+const { title } = require('node:process')
 
 const api = supertest(app)
 
@@ -50,6 +51,48 @@ test('blogs added succesfully', async () => {
 
     const response = await api.get('/api/blogs')
     assert.strictEqual(response.body.length, initialBlogs.length + 1)
+
+})
+
+test('blogs updated succesfully', async () => {
+  const blogs = await api.get('/api/blogs') 
+  const updateBlog = blogs.body[0] 
+  
+  console.log('Blog to update: ', updateBlog)
+
+  updateBlog = {...Blog,
+    likes: 10
+  }
+  
+  console.log('Blog updated: ', updateBlog)
+
+    console.log('Blog before update: ', blogs.body[0])
+
+  await api 
+  .put(`/api/blogs/${updateBlog.id}`)
+  .send(updateBlog)
+    .expect(204)
+
+    const blogsUpdate = await api.get('/api/blogs')
+      console.log('Blogs despues de borrar el blog: ', blogsUpdate.body)
+    assert.strictEqual(blogsUpdate.body.length, blogs.body.length - 1)
+
+})
+
+test('blogs deleted succesfully', async () => {
+  const blogs = await api.get('/api/blogs') 
+  const deleteBlog = blogs.body[0] 
+
+    console.log('Blogs before delete the blog: ', blogs.body)
+    console.log('Blog to delete: ', deleteBlog)
+
+  await api 
+  .delete(`/api/blogs/${deleteBlog.id}`)
+    .expect(204) 
+
+    const blogsUpdate = await api.get('/api/blogs')
+      console.log('Blogs after delete the blog: ', blogsUpdate.body)
+    assert.strictEqual(blogsUpdate.body.length, blogs.body.length - 1)
 
 })
 
