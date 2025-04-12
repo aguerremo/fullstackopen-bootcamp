@@ -1,4 +1,4 @@
-const { test, after, beforeEach } = require('node:test')
+const { test, after, beforeEach, describe } = require('node:test')
 const mongoose = require('mongoose')
 const supertest = require('supertest')
 const app = require('../app')
@@ -34,102 +34,104 @@ beforeEach(async () => {
 })
 
 
-
-test('blogs added succesfully', async () => {
-  const newBlog = {
-    title: 'Prueba post 3',
-    author: 'Author prueba 3',
-    url: 'www.facebook.test.com',
-    likes: 2
-  }
-
-  await api
-    .post('/api/blogs')
-    .send(newBlog)
-    .expect(200)
-    .expect('Content-Type', /application\/json/)
+describe('Add a blog', () => {
+  test('blogs added succesfully', async () => {
+    const newBlog = {
+      title: 'Prueba post 3',
+      author: 'Author prueba 3',
+      url: 'www.facebook.test.com',
+      likes: 2
+    }
+  
+    await api
+      .post('/api/blogs')
+      .send(newBlog)
+      .expect(200)
+      .expect('Content-Type', /application\/json/)
 
     const response = await api.get('/api/blogs')
     assert.strictEqual(response.body.length, initialBlogs.length + 1)
-
+  })
 })
 
-test('blogs updated succesfully', async () => {
-  const blogs = await api.get('/api/blogs') 
-  const updateBlog = blogs.body[0] 
+describe('Update a blog', () => {
+  test('blogs updated succesfully', async () => {
+    const blogs = await api.get('/api/blogs') 
+    const blogToUpdate = blogs.body[0]
   
-  console.log('Blog to update: ', updateBlog)
+    console.log('Blog to update: ', blogToUpdate)
 
-  updateBlog = {...Blog,
-    likes: 10
-  }
+    blogToUpdate.likes = 10
   
-  console.log('Blog updated: ', updateBlog)
+    console.log('Blog updated: ', blogToUpdate)
 
-    console.log('Blog before update: ', blogs.body[0])
+    console.log('Blog after update 1: ', blogs.body)
 
-  await api 
-  .put(`/api/blogs/${updateBlog.id}`)
-  .send(updateBlog)
-    .expect(204)
+    await api 
+      .put(`/api/blogs/${blogToUpdate.id}`)
+      .send(blogToUpdate)
+      .expect(200)
 
-    const blogsUpdate = await api.get('/api/blogs')
-      console.log('Blogs despues de borrar el blog: ', blogsUpdate.body)
-    assert.strictEqual(blogsUpdate.body.length, blogs.body.length - 1)
+    
+    console.log('Blogs after update 2: ', blogs.body)
+    assert.strictEqual(blogs.body[0], blogToUpdate )
 
+  })
 })
 
-test('blogs deleted succesfully', async () => {
-  const blogs = await api.get('/api/blogs') 
-  const deleteBlog = blogs.body[0] 
+describe('Delete a blog', () => {
+  test('blogs deleted succesfully', async () => {
+    const blogs = await api.get('/api/blogs') 
+    const deleteBlog = blogs.body[0] 
 
-    console.log('Blogs before delete the blog: ', blogs.body)
-    console.log('Blog to delete: ', deleteBlog)
+      console.log('Blogs before delete the blog: ', blogs.body)
+      console.log('Blog to delete: ', deleteBlog)
 
-  await api 
-  .delete(`/api/blogs/${deleteBlog.id}`)
-    .expect(204) 
+    await api 
+    .delete(`/api/blogs/${deleteBlog.id}`)
+      .expect(204) 
 
-    const blogsUpdate = await api.get('/api/blogs')
-      console.log('Blogs after delete the blog: ', blogsUpdate.body)
-    assert.strictEqual(blogsUpdate.body.length, blogs.body.length - 1)
+      const blogsUpdate = await api.get('/api/blogs')
+        console.log('Blogs after delete the blog: ', blogsUpdate.body)
+      assert.strictEqual(blogsUpdate.body.length, blogs.body.length - 1)
 
+  })
 })
 
+describe('Blog have id property', () => {
+  test('blogs have id property instead of _id', async () => {
+    const response = await api.get('/api/blogs')
 
-
-test('blogs have id property instead of _id', async () => {
-  const response = await api.get('/api/blogs')
-
- response.body.forEach(blog =>{
-  assert.ok(blog.id)
- })
+    response.body.forEach(blog =>{
+      assert.ok(blog.id)
+    })
+  })
 })
 
-
-
-test('blogs are returned at JSON', async () => {
-  await api
-    .get('/api/blogs')
-    .expect(200)
-    .expect('Content-Type', /application\/json/)
+describe('Blog at JSON', () => {
+  test('blogs are returned at JSON', async () => {
+    await api
+      .get('/api/blogs')
+      .expect(200)
+      .expect('Content-Type', /application\/json/)
+  })
 })
 
+describe('Number of blogs', () => {
+  test('there are two blogs', async () => {
+    const response = await api.get('/api/blogs')
 
-
-test('there are two blogs', async () => {
-  const response = await api.get('/api/blogs')
-
-  assert.strictEqual(response.body.length, initialBlogs.length)
+    assert.strictEqual(response.body.length, initialBlogs.length)
+  })
 })
 
+describe('Content of first blog', () => {
+  test('the first blog is about pruebas', async () => {
+    const response = await api.get('/api/blogs')
 
-
-test('the first blog is about pruebas', async () => {
-  const response = await api.get('/api/blogs')
-
-  const titles = response.body.map(e => e.title)
-  assert(titles.some(title => title.includes('prueba')))
+    const titles = response.body.map(e => e.title)
+    assert(titles.some(title => title.includes('prueba')))
+  })
 })
 
 after(async () => {

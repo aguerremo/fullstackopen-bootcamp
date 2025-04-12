@@ -19,7 +19,13 @@ const blogSchema = new mongoose.Schema({
   likes:{
     type: Number,
     required: [true, 'Likes required']
-  }
+  },
+  user:[
+      {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'User'
+      }
+    ],
 })
 
 blogSchema.set('toJSON', {
