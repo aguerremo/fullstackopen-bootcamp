@@ -1,11 +1,13 @@
-POST http://localhost:3001/api/blogs/
+POST http://localhost:3003/api/blogs/
 Content-Type: application/json
 
 {
   
-  "author": "Autor Prueba 2",
-  "title": "Title de prueba numero 2",
-  "url": "www.amazon.com",
-  "likes": 12
+  "author": "Tete",
+  "title": "A mi me gusta el chatgpt",
+  "url": "www.chatgpt.com",
+  "likes": 1203,
+  "user": "67fabf385b0c2dc8ce20e073"
+
+  }
     
-}
