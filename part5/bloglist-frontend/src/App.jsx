@@ -12,7 +12,7 @@ const App = () => {
   const [password, setPassword] = useState('')
   const [user, setUser] = useState(null)
   const [newAuthor, setNewAuthor] = useState('')
-  const [newBlog, setNewBlog] = useState('')
+  const [newBlog, setNewBlog] = useState([author,title,url])
 
 
   useEffect(() => {
