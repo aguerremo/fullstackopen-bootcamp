@@ -1,4 +1,5 @@
 import loginService from './services/login'
+import blogService from './services/blogs'
 
 export const Login = ({setPassword, setUsername, username, password, setUser}) => {
   
@@ -9,10 +10,15 @@ export const Login = ({setPassword, setUsername, username, password, setUser}) =
         username,
         password
      })
-     console.log('User: ', user)
-       setUser(user)
-       setUsername('')
-       setPassword('')
+
+     window.localStorage.setItem(
+      'loggedBlogappUser', JSON.stringify(user)
+    ) 
+
+      blogService.setToken(user.token)
+      setUser(user)
+      setUsername('')
+      setPassword('')
     } catch (error) {
 
       console.log('Wrong Credentials')
