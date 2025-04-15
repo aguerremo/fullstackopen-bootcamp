@@ -2,7 +2,7 @@ import { InputButton } from "./InputButton"
 import blogService from "../services/blogs"
 
 
-export const AddBlog = ({newBlog, setNewBlog, setBlogs}) => {
+export const AddBlog = ({newBlog, setNewBlog, setBlogs, setDoneMessage, setErrorMessage}) => {
       
   const addNewBlog = async (event) => {
     event.preventDefault()
@@ -20,9 +20,11 @@ export const AddBlog = ({newBlog, setNewBlog, setBlogs}) => {
     const blogs = await blogService.getAll()
     console.log('Blogs: ', blogs)
     setBlogs(blogs)
+    setDoneMessage(blog.title + ' created succesfully!')
 
     } catch (error){
       console.log('Error')
+      setErrorMessage(error)
     }
   }
    

@@ -1,7 +1,9 @@
 import loginService from './services/login'
 import blogService from './services/blogs'
+import { Notifications } from './components/Notifications'
 
-export const Login = ({setPassword, setUsername, username, password, setUser}) => {
+
+export const Login = ({setPassword, setUsername, username, password, setUser, setErrorMessage, errorMessage}) => {
   
   const handleLogin = async (event) => {
     event.preventDefault()
@@ -20,12 +22,13 @@ export const Login = ({setPassword, setUsername, username, password, setUser}) =
       setUsername('')
       setPassword('')
     } catch (error) {
-
+      setErrorMessage('Wrong credentials')
       console.log('Wrong Credentials')
     }
      
    }
    return <div>
+    <Notifications setErrorMessage={setErrorMessage} errorMessage={errorMessage}/>
     <h2>log in to application</h2>
     <form onSubmit={handleLogin}>
      <div>
