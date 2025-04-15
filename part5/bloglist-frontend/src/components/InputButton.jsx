@@ -1,16 +1,28 @@
-export const InputButton = ({setNewAuthor, setNewBlog, newAuthor, newBlog}) => {
+export const InputButton = ({newBlog, setNewBlog}) => {
 
-  const handleNewAuthor = (event) => {
-      console.log(event.target.value);
-      setNewAuthor(event.target.value)
-    }
   const handleNewBlog = (event) => {
-      console.log(event.target.value);
-      setNewBlog(event.target.value)
-     
+    const {name, value} = event.target
+    setNewBlog({
+      ...newBlog,
+      [name]: value
+    })
     }
   return<div>
-  Author: <input value={newAuthor} onChange={handleNewAuthor}/> <br />
-  Blog: <input value={newBlog} onChange={handleNewBlog}/>
+  Author: <input 
+    type="text" 
+    name='author'
+    value={newBlog.author} 
+    onChange={handleNewBlog}/> <br />
+  Title: <input 
+    type="text" 
+    name='title'
+    value={newBlog.title} 
+    onChange={handleNewBlog}/> <br />
+  URL: <input 
+    type="text" 
+    name='url'
+    value={newBlog.url} 
+    onChange={handleNewBlog}/> <br />
+
 </div>
 }

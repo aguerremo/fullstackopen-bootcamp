@@ -11,9 +11,11 @@ const App = () => {
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
   const [user, setUser] = useState(null)
-  const [newAuthor, setNewAuthor] = useState('')
-  const [newBlog, setNewBlog] = useState([author,title,url])
-
+  const [newBlog, setNewBlog] = useState({
+    author:'',
+    title:'',
+    url:''
+  })
 
   useEffect(() => {
     blogService.getAll().then(blogs =>
@@ -38,7 +40,7 @@ const App = () => {
       <div>
         <h2>blogs</h2>
         <Logout user={user} setUser={setUser}/>
-        <AddBlog newAuthor={newAuthor} newBlog={newBlog} setNewAuthor={setNewAuthor} setNewBlog={setNewBlog} />
+        <AddBlog newBlog={newBlog} setNewBlog={setNewBlog} setBlogs={setBlogs} />
         {blogs.map(blog =>
           <Blog key={blog.id} blog={blog} />
 

@@ -40,7 +40,6 @@ const getTokenFrom = request => {
 
 blogsRouter.post('/', async (request, response, next) => {
   const body = request.body
-  console.log('Funciona 4')
 
   const token = getTokenFrom(request)
 
