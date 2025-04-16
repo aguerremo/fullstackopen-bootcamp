@@ -1,5 +1,3 @@
-
-
 export const Notifications = ({doneMessage, errorMessage, setErrorMessage, setDoneMessage}) => {
 
   const removeDoneNotification = () => {
@@ -18,17 +16,16 @@ export const Notifications = ({doneMessage, errorMessage, setErrorMessage, setDo
     return null
       
     } if (doneMessage !== null) {
-      removeDoneNotification()
         return <div className="done">
         {doneMessage}
+        {removeDoneNotification()}
       </div>
 
-   } if (errorMessage !== null)
-
-      removeErrorNotification()
+   } if (errorMessage !== null) {
 
         return <div className="error">
         {errorMessage}
+        {removeErrorNotification()}
       </div>
   }
-
+}

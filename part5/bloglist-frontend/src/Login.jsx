@@ -29,9 +29,10 @@ export const Login = ({setPassword, setUsername, username, password, setUser, se
      
    }
    return <div>
-    <Notifications setErrorMessage={setErrorMessage} errorMessage={errorMessage} doneMessage={null}/>
     <h2>log in to application</h2>
+    <Notifications setErrorMessage={setErrorMessage} errorMessage={errorMessage} doneMessage={null}/>
     <form onSubmit={handleLogin}>
+
      <div>
        <input 
          type="text"

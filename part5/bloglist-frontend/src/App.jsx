@@ -4,7 +4,6 @@ import blogService from './services/blogs'
 import { Login } from './Login'
 import { AddBlog } from './components/AddBlog'
 import { Logout } from './components/Logout'
-import { Notifications } from './components/Notifications'
 
 
 const App = () => {
@@ -17,8 +16,8 @@ const App = () => {
     title:'',
     url:''
   })
-  const [doneMessage, setDoneMessage] = useState('')
-  const [errorMessage, setErrorMessage] = useState('')
+  const [doneMessage, setDoneMessage] = useState(null)
+  const [errorMessage, setErrorMessage] = useState(null)
 
 
   useEffect(() => {
@@ -45,10 +44,12 @@ const App = () => {
   )} else {
     return ( 
       <div>
-        <Notifications setErrorMessage={setErrorMessage} errorMessage={errorMessage} doneMessage={doneMessage} setDoneMessage={setDoneMessage}/>
         <h2>blogs</h2>
         <Logout user={user} setUser={setUser}/>
-        <AddBlog newBlog={newBlog} setNewBlog={setNewBlog} setBlogs={setBlogs} />
+        <AddBlog newBlog={newBlog} setNewBlog={setNewBlog} setBlogs={setBlogs} setDoneMessage={setDoneMessage} setErrorMessage={setErrorMessage} errorMessage={errorMessage} doneMessage={doneMessage} />
+        <br />
+        <h3>Blog list:</h3>
+        <hr></hr>
         {blogs.map(blog =>
           <Blog key={blog.id} blog={blog} />
 

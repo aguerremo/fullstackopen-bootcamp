@@ -1,13 +1,14 @@
 div {
-    color: gray;
+    color: rgb(29, 29, 29);
     padding-top: 3px;
-    font-style: italic;
     font-size: 19px;
+    
 }
+
 
 .done {
     color: green;
-    max-width: 350px;
+    max-width: fit-content;
     background: lightgrey;
     font-size: 18px;
     border-style: solid;
@@ -18,7 +19,7 @@ div {
 
   .error {
     color: red;
-    max-width: 350px;
+    max-width: fit-content;
     background: lightgrey;
     font-size: 18px;
     border-style: solid;
