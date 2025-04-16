@@ -39,6 +39,7 @@ const App = () => {
   if (user === null) {
      return( 
       <div>
+        <Notifications errorMessage={errorMessage} doneMessage={doneMessage} setDoneMessage={setDoneMessage} setErrorMessage={setErrorMessage}/>
     <Login setPassword={setPassword} setUsername={setUsername} username={username} password={password} user={user} setUser={setUser} setErrorMessage={setErrorMessage}/>
       </div>
      

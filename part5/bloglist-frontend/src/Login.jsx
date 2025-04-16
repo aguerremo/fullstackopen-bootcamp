@@ -22,7 +22,7 @@ export const Login = ({setPassword, setUsername, username, password, setUser, se
       setUsername('')
       setPassword('')
     } catch (error) {
-      setErrorMessage('Wrong credentials')
+      errorMessage('Wrong credentials')
       console.log('Wrong Credentials')
     }
      
