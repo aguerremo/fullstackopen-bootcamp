@@ -1,6 +1,7 @@
 import loginService from './services/login'
 import blogService from './services/blogs'
 import { Notifications } from './components/Notifications'
+import LoginForm from './LoginForm'
 
 
 export const Login = ({setPassword, setUsername, username, password, setUser, setErrorMessage, errorMessage, doneMessage}) => {
@@ -31,27 +32,7 @@ export const Login = ({setPassword, setUsername, username, password, setUser, se
    return <div>
     <h2>log in to application</h2>
     <Notifications setErrorMessage={setErrorMessage} errorMessage={errorMessage} doneMessage={null}/>
-    <form onSubmit={handleLogin}>
-
-     <div>
-       <input 
-         type="text"
-         value={username}
-         name='Username'
-         placeholder='Username'
-         onChange={({target})=> setUsername(target.value)} />
-     </div>
-     <div>
-       <input 
-         type="password"
-         value={password}
-         name='Password'
-         placeholder='Password'
-         onChange={({target})=> setPassword(target.value)} />
-     </div>
-     <button>Login</button>
-    
-   </form>
+    <LoginForm handleLogin={handleLogin} setPassword={setPassword} setUsername={setUsername} username={username} password={password} setUser={setUser} setErrorMessage={setErrorMessage} errorMessage={errorMessage}/>
 
    </div>
    
