@@ -1,8 +1,8 @@
 import { useState, useEffect } from 'react'
-import Blog from './components/Blog'
+import Blog from './components/blogs/Blog'
 import blogService from './services/blogs'
 import { Login } from './components/login/Login'
-import { AddBlog } from './components/AddBlog'
+import { AddBlog } from './components/blogs/AddBlog'
 import { Logout } from './components/login/Logout'
 
 

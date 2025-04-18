@@ -1,6 +1,6 @@
 import loginService from '../../services/login'
 import blogService from '../../services/blogs'
-import { Notifications } from '../Notifications'
+import { Notifications } from '../notifications/Notifications'
 import LoginForm from './LoginForm'
 
 

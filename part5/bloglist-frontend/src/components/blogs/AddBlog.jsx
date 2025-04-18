@@ -1,6 +1,6 @@
 import { InputButton } from "./InputButton"
-import blogService from "../services/blogs"
-import { Notifications } from './Notifications'
+import blogService from "../../services/blogs"
+import { Notifications } from '../notifications/Notifications'
 
 
 export const AddBlog = ({newBlog, setNewBlog, setBlogs, setDoneMessage, setErrorMessage, errorMessage, doneMessage, addBLogVisible, setAddBlogVisible}) => {
