@@ -7,8 +7,8 @@ export const Logout = ({user, setUser}) => {
   }
 
   return <div>
-    <p>{user.name} has been logged</p>
-    <button onClick={handleLogout}>logout</button>
+    {user.name} has been logged <br />
+    <button onClick={handleLogout}>Logout</button>
   </div>
   
 }

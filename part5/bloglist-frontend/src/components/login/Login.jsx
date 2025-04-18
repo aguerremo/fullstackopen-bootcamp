@@ -1,6 +1,6 @@
-import loginService from './services/login'
-import blogService from './services/blogs'
-import { Notifications } from './components/Notifications'
+import loginService from '../../services/login'
+import blogService from '../../services/blogs'
+import { Notifications } from '../Notifications'
 import LoginForm from './LoginForm'
 
 
@@ -30,7 +30,7 @@ export const Login = ({setPassword, setUsername, username, password, setUser, se
      
    }
    return <div>
-    <h2>log in to application</h2>
+    <h2>Log in</h2>
     <Notifications setErrorMessage={setErrorMessage} errorMessage={errorMessage} doneMessage={null}/>
     <LoginForm handleLogin={handleLogin} setPassword={setPassword} setUsername={setUsername} username={username} password={password} setUser={setUser} setErrorMessage={setErrorMessage} errorMessage={errorMessage}/>
 
