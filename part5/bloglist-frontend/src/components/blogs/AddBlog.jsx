@@ -1,13 +1,9 @@
 import { InputButton } from "./InputButton"
 import blogService from "../../services/blogs"
 import { Notifications } from '../notifications/Notifications'
+import Togglable from '../Togglable'
 
-
-export const AddBlog = ({newBlog, setNewBlog, setBlogs, setDoneMessage, setErrorMessage, errorMessage, doneMessage, addBLogVisible, setAddBlogVisible}) => {
-
-  const hideWhenVisible = { display: addBLogVisible ? 'none' : '' }
-  const showWhenVisible = { display: addBLogVisible ? '' : 'none' }
-
+export const AddBlog = ({newBlog, setNewBlog, setBlogs, setDoneMessage, setErrorMessage, errorMessage, doneMessage}) => {
       
   const addNewBlog = async (event) => {
     event.preventDefault()
@@ -35,19 +31,14 @@ export const AddBlog = ({newBlog, setNewBlog, setBlogs, setDoneMessage, setError
    
 
   return (
-  <div>
+  <Togglable buttonToShow={'Create Blog'} buttonToHide={'Cancel'}>
     <h3>Add a new blog</h3>
     <Notifications setErrorMessage={setErrorMessage} errorMessage={errorMessage} doneMessage={doneMessage} setDoneMessage={setDoneMessage}/>
-      <div style={hideWhenVisible}>
-        <button onClick={() => setAddBlogVisible(true)}>Create Blog</button>
-      </div>
-      <div style={showWhenVisible}>
+
         <form  onSubmit={addNewBlog}>
           <InputButton newBlog={newBlog} setNewBlog={setNewBlog}/>
           <button type="submit">Submit</button>
         </form>
-        <button onClick={() => setAddBlogVisible(false)}>Cancel</button>
-      </div>
-  </div>
+  </Togglable>
   )
 }

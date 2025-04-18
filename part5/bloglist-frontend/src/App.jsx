@@ -18,7 +18,6 @@ const App = () => {
   })
   const [doneMessage, setDoneMessage] = useState(null)
   const [errorMessage, setErrorMessage] = useState(null)
-  const [addBLogVisible, setAddBlogVisible] = useState(null)
 
   useEffect(() => {
     blogService.getAll().then(blogs =>
@@ -61,9 +60,7 @@ const App = () => {
             setDoneMessage={setDoneMessage} 
             setErrorMessage={setErrorMessage} 
             errorMessage={errorMessage} 
-            doneMessage={doneMessage} 
-            addBLogVisible={addBLogVisible}
-            setAddBlogVisible={setAddBlogVisible}
+            doneMessage={doneMessage}  
           />
           <br />
           <hr />
