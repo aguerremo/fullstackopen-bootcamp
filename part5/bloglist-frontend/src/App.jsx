@@ -40,7 +40,10 @@ const App = () => {
             <hr />
           <h3>Blog list:</h3>
             {blogs.map(blog => (
-              <Blog key={blog.id} blog={blog} />
+              <div>
+                <Blog key={blog.id} blog={blog} />
+              </div>
+              
             ))}
         </div>
       )}

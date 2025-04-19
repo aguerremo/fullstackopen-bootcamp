@@ -15,6 +15,7 @@ const Blog = ({ blog }) => {
     gap: '10px'
   }
 
+
   return (
     <div style={blogStyle}>
       {blog.title} 
