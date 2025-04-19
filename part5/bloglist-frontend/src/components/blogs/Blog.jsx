@@ -26,7 +26,7 @@ const Blog = ({ blog }) => {
        Likes: {blog.likes}
        
     </Togglable>
-    <Likes/>
+    <Likes id={blog.id} likes={blog.likes}/>
     </div>
     )
 }
