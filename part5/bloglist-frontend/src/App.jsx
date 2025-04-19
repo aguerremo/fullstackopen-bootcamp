@@ -8,16 +8,7 @@ import { Logout } from './components/login/Logout'
 
 const App = () => {
   const [blogs, setBlogs] = useState([])
-  const [username, setUsername] = useState('')
-  const [password, setPassword] = useState('')
   const [user, setUser] = useState(null)
-  const [newBlog, setNewBlog] = useState({
-    author:'',
-    title:'',
-    url:''
-  })
-  const [doneMessage, setDoneMessage] = useState(null)
-  const [errorMessage, setErrorMessage] = useState(null)
 
   useEffect(() => {
     blogService.getAll().then(blogs =>
@@ -34,18 +25,11 @@ const App = () => {
     }
   }, [])
 
- 
    return (
     <div>
       {user === null ? (
         <Login 
-          setPassword={setPassword} 
-          setUsername={setUsername} 
-          username={username} 
-          password={password} 
           setUser={setUser} 
-          setErrorMessage={setErrorMessage} 
-          errorMessage={errorMessage}
         />
       ) : (
         <div>
@@ -54,13 +38,7 @@ const App = () => {
           <br />
           <hr />
           <AddBlog 
-            newBlog={newBlog} 
-            setNewBlog={setNewBlog} 
             setBlogs={setBlogs} 
-            setDoneMessage={setDoneMessage} 
-            setErrorMessage={setErrorMessage} 
-            errorMessage={errorMessage} 
-            doneMessage={doneMessage}  
           />
           <br />
           <hr />

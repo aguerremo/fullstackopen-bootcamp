@@ -2,8 +2,16 @@ import { InputButton } from "./InputButton"
 import blogService from "../../services/blogs"
 import { Notifications } from '../notifications/Notifications'
 import Togglable from '../Togglable'
+import { useState } from "react"
 
-export const AddBlog = ({newBlog, setNewBlog, setBlogs, setDoneMessage, setErrorMessage, errorMessage, doneMessage}) => {
+export const AddBlog = ({setBlogs}) => {
+    const [doneMessage, setDoneMessage] = useState(null)
+    const [errorMessage, setErrorMessage] = useState(null)
+    const [newBlog, setNewBlog] = useState({
+        author:'',
+        title:'',
+        url:''
+      })
       
   const addNewBlog = async (event) => {
     event.preventDefault()

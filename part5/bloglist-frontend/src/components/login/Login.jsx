@@ -2,10 +2,14 @@ import loginService from '../../services/login'
 import blogService from '../../services/blogs'
 import { Notifications } from '../notifications/Notifications'
 import LoginForm from './LoginForm'
+import { useState } from 'react'
 
-
-export const Login = ({setPassword, setUsername, username, password, setUser, setErrorMessage, errorMessage, doneMessage}) => {
+export const Login = ({setUser}) => {
   
+const [username, setUsername] = useState('')
+const [password, setPassword] = useState('')
+const [errorMessage, setErrorMessage] = useState(null)
+
   const handleLogin = async (event) => {
     event.preventDefault()
     try {
