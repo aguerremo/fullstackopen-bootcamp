@@ -2,7 +2,7 @@ import { InputButton } from "./InputButton"
 import blogService from "../../services/blogs"
 import { Notifications } from '../notifications/Notifications'
 import Togglable from '../Togglable'
-import { useState } from "react"
+import { useState, useRef } from "react"
 
 export const AddBlog = ({setBlogs}) => {
     const [doneMessage, setDoneMessage] = useState(null)
@@ -12,6 +12,8 @@ export const AddBlog = ({setBlogs}) => {
         title:'',
         url:''
       })
+
+    const togglableRef = useRef()
       
   const addNewBlog = async (event) => {
     event.preventDefault()
@@ -26,6 +28,7 @@ export const AddBlog = ({setBlogs}) => {
       
     console.log('succes!', blog)
     setNewBlog({ author: '', title: '', url: '' })
+    togglableRef.current.toggleVisible()
     const blogs = await blogService.getAll()
     console.log('Blogs: ', blogs)
     setBlogs(blogs)
@@ -36,10 +39,10 @@ export const AddBlog = ({setBlogs}) => {
       setErrorMessage('Error')
     }
   }
-   
+
 
   return (
-  <Togglable buttonToShow={'Create Blog'} buttonToHide={'Cancel'}>
+<Togglable buttonToShow={'Create Blog'} buttonToHide={'Cancel'} ref={togglableRef}>
     <h3>Add a new blog</h3>
     <Notifications setErrorMessage={setErrorMessage} errorMessage={errorMessage} doneMessage={doneMessage} setDoneMessage={setDoneMessage}/>
 
@@ -47,6 +50,6 @@ export const AddBlog = ({setBlogs}) => {
           <InputButton newBlog={newBlog} setNewBlog={setNewBlog}/>
           <button type="submit">Submit</button>
         </form>
-  </Togglable>
+  </Togglable>  
   )
 }

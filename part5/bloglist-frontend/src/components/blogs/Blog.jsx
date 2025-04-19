@@ -1,4 +1,6 @@
 import Togglable from "../Togglable"
+import Likes from "./LikeButton"
+
 
 const Blog = ({ blog }) => {
 
@@ -24,6 +26,7 @@ const Blog = ({ blog }) => {
        Likes: {blog.likes}
        
     </Togglable>
+    <Likes/>
     </div>
     )
 }

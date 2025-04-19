@@ -34,19 +34,14 @@ const App = () => {
       ) : (
         <div>
           <h1>Blogs</h1>
-          <Logout user={user} setUser={setUser} />
-          <br />
-          <hr />
-          <AddBlog 
-            setBlogs={setBlogs} 
-          />
-          <br />
-          <hr />
-
+          <Logout user={user} setUser={setUser} /><br />
+            <hr />
+          <AddBlog setBlogs={setBlogs} /><br />
+            <hr />
           <h3>Blog list:</h3>
-          {blogs.map(blog => (
-            <Blog key={blog.id} blog={blog} />
-          ))}
+            {blogs.map(blog => (
+              <Blog key={blog.id} blog={blog} />
+            ))}
         </div>
       )}
     </div>
