@@ -3,7 +3,7 @@ const baseUrl = '/api/login'
 
 const login = async credentials => {
 
-  const {data} = await axios.post(baseUrl, credentials)
+  const { data } = await axios.post(baseUrl, credentials)
   return data
 }
 

@@ -1,4 +1,4 @@
-import blogService from "../../services/blogs"
+import blogService from '../../services/blogs'
 
 const Remove = ({ setBlogs, user, blog }) => {
   if (!user || !blog.user) {
@@ -12,14 +12,14 @@ const Remove = ({ setBlogs, user, blog }) => {
     event.preventDefault()
     try {
       await blogService.remove(blog.id)
-      setBlogs(prevBlogs => prevBlogs.filter(b => b.id !== blog.id)) 
+      setBlogs(prevBlogs => prevBlogs.filter(b => b.id !== blog.id))
     } catch (error) {
       console.log('Error: ', error)
     }
   }
-console.log(user)
-console.log('user id', userId)
-console.log('blog user id', blogUserId)
+  console.log(user)
+  console.log('user id', userId)
+  console.log('blog user id', blogUserId)
 
 
   if (userId !== blogUserId) {

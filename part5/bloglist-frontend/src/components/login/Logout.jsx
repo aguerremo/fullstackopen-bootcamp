@@ -1,4 +1,4 @@
-export const Logout = ({user, setUser}) => {
+export const Logout = ({ user, setUser }) => {
   const handleLogout = () => {
     window.localStorage.clear()
     setUser(null)
@@ -10,5 +10,5 @@ export const Logout = ({user, setUser}) => {
     {user.name} has been logged <br />
     <button onClick={handleLogout}>Logout</button>
   </div>
-  
+
 }

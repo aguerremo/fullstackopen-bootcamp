@@ -13,7 +13,7 @@ const App = () => {
   useEffect(() => {
     blogService.getAll().then(blogs =>
       setBlogs( blogs )
-    )  
+    )
   }, [])
 
   useEffect(() => {
@@ -27,24 +27,24 @@ const App = () => {
 
   // console.log('user token at App:', user.token)
 
-   return (
+  return (
     <div>
       {user === null ? (
-        <Login 
+        <Login
           setUser={setUser}
         />
       ) : (
         <div>
           <h1>Blogs</h1>
           <Logout user={user} setUser={setUser} /><br />
-            <hr />
+          <hr />
           <AddBlog setBlogs={setBlogs} /><br />
-            <hr />
+          <hr />
           <BlogList blogs={blogs} setBlogs={setBlogs} user={user}/>
         </div>
       )}
     </div>
   )
-} 
+}
 
 export default App
