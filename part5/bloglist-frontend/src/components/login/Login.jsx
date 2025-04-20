@@ -13,17 +13,17 @@ const [errorMessage, setErrorMessage] = useState(null)
   const handleLogin = async (event) => {
     event.preventDefault()
     try {
-      const user = await loginService.login({
+      const userLogged = await loginService.login({
         username,
         password
      })
 
      window.localStorage.setItem(
-      'loggedBlogappUser', JSON.stringify(user)
+      'loggedBlogappUser', JSON.stringify(userLogged)
     ) 
 
-      blogService.setToken(user.token)
-      setUser(user)
+      blogService.setToken(userLogged.token)
+      setUser(userLogged)
       setUsername('')
       setPassword('')
     } catch (error) {
@@ -31,7 +31,6 @@ const [errorMessage, setErrorMessage] = useState(null)
       console.log('Wrong Credentials')
       console.log(errorMessage)
     }
-     
    }
    return <div>
     <h2>Log in</h2>

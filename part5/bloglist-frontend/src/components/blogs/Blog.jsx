@@ -1,8 +1,9 @@
 import Togglable from "../Togglable"
 import Likes from "./LikeButton"
+import Remove from "./RemoveBlog"
 
 
-const Blog = ({ blog }) => {
+const Blog = ({ blog, setBlogs, user}) => {
 
   const blogStyle = {
     paddingTop: 10,
@@ -10,7 +11,6 @@ const Blog = ({ blog }) => {
     border: 'solid',
     borderWidth: 1,
     marginBottom: 5,
-    display: 'flex',
     alignItems: 'center',
     gap: '10px'
   }
@@ -18,24 +18,29 @@ const Blog = ({ blog }) => {
   const blogToShow = () => {
     return (
       <div>
-    Author: {blog.author} 
+    <em>Author:</em> {blog.author} 
     <br />
-       URL: {blog.url}
-    <br />
-       Likes: {blog.likes}
+       <em>URL:</em> {blog.url}
+  
+
       </div>
     )
-
+    
 
   }
 
+  console.log(blog)
+  
   return (
     <div style={blogStyle}>
-      {blog.title} 
+     <strong>{blog.title}</strong> 
    <Togglable buttonToShow={'more info'} buttonToHide={'close'}>
       {blogToShow()}
     </Togglable>
+    
     <Likes id={blog.id} likes={blog.likes}/>
+      
+    <Remove setBlogs={setBlogs} user={user} blog={blog}/>
     </div>
     )
 }

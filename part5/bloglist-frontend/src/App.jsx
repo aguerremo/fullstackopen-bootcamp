@@ -25,11 +25,13 @@ const App = () => {
     }
   }, [])
 
+  // console.log('user token at App:', user.token)
+
    return (
     <div>
       {user === null ? (
         <Login 
-          setUser={setUser} 
+          setUser={setUser}
         />
       ) : (
         <div>
@@ -38,7 +40,7 @@ const App = () => {
             <hr />
           <AddBlog setBlogs={setBlogs} /><br />
             <hr />
-          <BlogList blogs={blogs}/>
+          <BlogList blogs={blogs} setBlogs={setBlogs} user={user}/>
         </div>
       )}
     </div>
