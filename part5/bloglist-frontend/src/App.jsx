@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react'
-import Blog from './components/blogs/Blog'
+import BlogList from './components/blogs/BlogList'
 import blogService from './services/blogs'
 import { Login } from './components/login/Login'
 import { AddBlog } from './components/blogs/AddBlog'
@@ -38,13 +38,7 @@ const App = () => {
             <hr />
           <AddBlog setBlogs={setBlogs} /><br />
             <hr />
-          <h3>Blog list:</h3>
-            {blogs.map(blog => (
-              <div>
-                <Blog key={blog.id} blog={blog} />
-              </div>
-              
-            ))}
+          <BlogList blogs={blogs}/>
         </div>
       )}
     </div>

@@ -14,18 +14,26 @@ const Blog = ({ blog }) => {
     alignItems: 'center',
     gap: '10px'
   }
+ 
+  const blogToShow = () => {
+    return (
+      <div>
+    Author: {blog.author} 
+    <br />
+       URL: {blog.url}
+    <br />
+       Likes: {blog.likes}
+      </div>
+    )
 
+
+  }
 
   return (
     <div style={blogStyle}>
       {blog.title} 
    <Togglable buttonToShow={'more info'} buttonToHide={'close'}>
-       Author: {blog.author} 
-    <br />
-       URL: {blog.url}
-    <br />
-       Likes: {blog.likes}
-       
+      {blogToShow()}
     </Togglable>
     <Likes id={blog.id} likes={blog.likes}/>
     </div>
