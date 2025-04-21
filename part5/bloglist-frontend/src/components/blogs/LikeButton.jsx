@@ -1,22 +1,22 @@
 import blogService from '../../services/blogs'
 import { useState } from 'react'
 
-const Likes = ({ id, likes }) => {
+const Likes = ({ id, likes, addLike }) => {
 
   const [newlikes, setNewLikes] = useState(likes)
 
-  const addLike = async (event) => {
-
+  const handleClick = async (event) => {
     event.preventDefault()
-    try {
-      setNewLikes(newlikes + 1)
+    setNewLikes(newlikes + 1)
+    if(addLike) {
+      addLike()
+    } else {
       const like = await blogService.update(id, { likes: newlikes + 1 })
-
       console.log('succes!', like)
-
-    } catch (error){
-      console.log('Error')
     }
+
+
+
   }
 
   return(
