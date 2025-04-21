@@ -28,7 +28,7 @@ const Blog = ({ blog, setBlogs, user }) => {
   }
 
   return (
-    <div style={blogStyle}>
+    <div style={blogStyle} className='blog' data-testid='blog'>
       <strong>{blog.title}</strong>
       <Togglable buttonToShow={'more info'} buttonToHide={'close'}>
         {blogToShow()}
