@@ -9,4 +9,14 @@ testingRouter.post('/reset', async (request, response) => {
   response.status(204).end()
 })
 
+testingRouter.get('/', async (request, response, next) => {
+  try{
+    const blogs = await Blog.find({}).populate('user')
+    response.json(blogs)
+  }catch (error){
+    next(error)
+  }
+ })
+
+
 module.exports = testingRouter

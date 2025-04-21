@@ -76,7 +76,14 @@ describe('Blog app', () => {
       await expect(locator).toBeVisible()
     })
 
+    test('A new blog can be deleted', async ({ page , request }) => {
+      await page.getByRole('button', { name: 'Remove Blog' }).click()
 
+      const response = await request.get('http://localhost:3003/api/testing')
+      const blogs = await response.json()
+
+      await expect(blogs).toHaveLength(0)
+    })
 
   })
 })
