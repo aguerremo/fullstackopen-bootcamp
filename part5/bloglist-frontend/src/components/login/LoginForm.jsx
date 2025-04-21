@@ -4,6 +4,7 @@ export default function LoginForm ({ setPassword, setUsername, handleLogin, user
     <div>
       <input
         type="text"
+        data-testid='username'
         value={username}
         name='Username'
         placeholder='Username'
@@ -12,6 +13,7 @@ export default function LoginForm ({ setPassword, setUsername, handleLogin, user
     <div>
       <input
         type="password"
+        data-testid='password'
         value={password}
         name='Password'
         placeholder='Password'

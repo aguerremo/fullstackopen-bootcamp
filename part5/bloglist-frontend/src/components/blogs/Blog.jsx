@@ -25,11 +25,7 @@ const Blog = ({ blog, setBlogs, user }) => {
 
       </div>
     )
-
-
   }
-
-  console.log(blog)
 
   return (
     <div style={blogStyle}>

@@ -1,12 +1,52 @@
 const { test, expect, beforeEach, describe } = require('@playwright/test')
-
 describe('Blog app', () => {
-  beforeEach(async ({ page }) => {
+  beforeEach(async ({ page, request }) => {
+    await request.post('http:localhost:3003/api/testing/reset')
+    await request.post('http:localhost:3003/api/users', {
+      data: {
+        name: 'Prueba',
+        username: 'prueba',
+        password: 'prueba1'
+      }
+    })
     await page.goto('http://localhost:5173')
   })
 
-  test('Login form is shown', async ({ page }) => {
-    const locator = await page.getByText('Log in')
+  test('Wrong user cant login', async ({ page }) => {
+    await page.getByTestId('username').fill('errorTest')
+    await page.getByTestId('password').fill('error')
+    await page.getByRole('button', { name: 'Login' }).click()
+
+    const locator = await page.getByText('Wrong credentials')
     await expect(locator).toBeVisible()
+  })
+
+  test('Correct user can login', async ({ page }) => {
+    await page.getByTestId('username').fill('prueba')
+    await page.getByTestId('password').fill('prueba1')
+    await page.getByRole('button', { name: 'Login' }).click()
+
+    const locator = await page.getByText('Blogs')
+    await expect(locator).toBeVisible()
+  })
+  describe('Blog app', () => {
+    beforeEach(async ({ page }) => {
+      await page.getByTestId('username').fill('prueba')
+      await page.getByTestId('password').fill('prueba1')
+      await page.getByRole('button', { name: 'Login' }).click()
+    })
+    test('A new blog can be created', async ({ page }) => {
+
+      await page.getByRole('button', { name: 'create blog' }).click()
+      await page.getByTestId('author').fill('Author test 123')
+      await page.getByTestId('title').fill('Title Test 123')
+      await page.getByTestId('url').fill('Url Test')
+      await page.getByRole('button', { name: 'Submit' }).click()
+
+
+      const locator = await page.getByText('created succesfully')
+      await expect(locator).toBeVisible()
+    })
+
   })
 })

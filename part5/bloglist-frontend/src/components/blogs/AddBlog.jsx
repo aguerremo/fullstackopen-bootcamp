@@ -25,7 +25,7 @@ export const AddBlog = ({ setBlogs }) => {
         url: newBlog.url,
         likes: 0
       })
-
+      console.log('HOLAAAAAAAAAAAAAAA')
       console.log('succes!', blog)
       setNewBlog({ author: '', title: '', url: '' })
       togglableRef.current.toggleVisible()
@@ -34,22 +34,24 @@ export const AddBlog = ({ setBlogs }) => {
       setBlogs(blogs)
       setDoneMessage(blog.title + ' by '+ blog.author +' created succesfully' )
 
-    } catch (error){
-      console.log('Error')
-      setErrorMessage('Error')
+    } catch (error) {
+      console.log('Error', error.response ? error.response.data : error.message)
+      setErrorMessage(error.response ? error.response.data.error : 'Error creating blog')
     }
   }
 
 
   return (
-    <Togglable buttonToShow={'Create Blog'} buttonToHide={'Cancel'} ref={togglableRef}>
-      <h3>Add a new blog</h3>
+    <div>
       <Notifications setErrorMessage={setErrorMessage} errorMessage={errorMessage} doneMessage={doneMessage} setDoneMessage={setDoneMessage}/>
+      <Togglable buttonToShow={'Create Blog'} buttonToHide={'Cancel'} ref={togglableRef}>
+        <h3>Add a new blog</h3>
 
-      <form  onSubmit={addNewBlog}>
-        <InputButton newBlog={newBlog} setNewBlog={setNewBlog}/>
-        <button type="submit">Submit</button>
-      </form>
-    </Togglable>
+        <form  onSubmit={addNewBlog}>
+          <InputButton newBlog={newBlog} setNewBlog={setNewBlog}/>
+          <button type="submit">Submit</button>
+        </form>
+      </Togglable>
+    </div>
   )
 }

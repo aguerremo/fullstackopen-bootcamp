@@ -17,10 +17,6 @@ const Remove = ({ setBlogs, user, blog }) => {
       console.log('Error: ', error)
     }
   }
-  console.log(user)
-  console.log('user id', userId)
-  console.log('blog user id', blogUserId)
-
 
   if (userId !== blogUserId) {
     return null // no mostrar botón si no es el mismo usuario
