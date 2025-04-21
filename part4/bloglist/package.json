@@ -3,7 +3,9 @@
     "start": "cross-env NODE_ENV=production node index.js",
     "dev": "cross-env NODE_ENV=development nodemon index.js",
     "test": "cross-env NODE_ENV=test node --test",
-    "test:blogs": "npm test -- tests/blogs.test.js"
+    "test:blogs": "npm test -- tests/blogs.test.js",
+    "start:test": "NODE_ENV=test node index.js"
+
   },
   "dependencies": {
     "bcrypt": "^5.1.1",

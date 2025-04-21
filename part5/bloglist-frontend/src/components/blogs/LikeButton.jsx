@@ -14,19 +14,15 @@ const Likes = ({ id, likes, addLike }) => {
       const like = await blogService.update(id, { likes: newlikes + 1 })
       console.log('succes!', like)
     }
-
-
-
   }
 
   return(
     <div>
       <em>Likes:</em> {newlikes} {}
-      <button onClick={addLike}>❤</button>
+      <button onClick={handleClick}>❤</button>
 
     </div>
   )
-
 }
 
 export default Likes
