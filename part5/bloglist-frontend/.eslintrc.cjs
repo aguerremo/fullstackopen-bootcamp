@@ -41,6 +41,7 @@ module.exports = {
     "arrow-spacing": [
         "error", { "before": true, "after": true }
     ],
+    'linebreak-style': 'off',
     "no-console": 0,
     "react/react-in-jsx-scope": "off",
     "react/prop-types": 0,
