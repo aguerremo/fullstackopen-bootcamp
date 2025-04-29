@@ -3,7 +3,14 @@ import VoteButton from "./VoteButton"
 
 const AnecdoteList = () => {
 
-    const anecdotes = useSelector(state => state)
+  const anecdotes = useSelector(state => {
+    if ( state.filter === 'ALL' ) {
+      return state.anecdotes
+    }
+    return state.filter  === 'ALL' 
+      ? state.notes.filter(note => note.important)
+      : state.notes.filter(note => !note.important)
+  })
   
     return <div>
       {anecdotes.sort((a,b) => b.votes - a.votes)
