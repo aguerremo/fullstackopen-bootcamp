@@ -1,4 +1,5 @@
-const filterReducer = (state = 'ALL', action) => {
+
+const filterReducer = (state = '', action) => {
   switch(action.type) {
     case 'FILTER':
       return action.data
@@ -10,7 +11,7 @@ const filterReducer = (state = 'ALL', action) => {
 export const filterChange = filter => {
   return {
     type:'FILTER',
-    pay: filter
+    data: filter
   }
 }
 

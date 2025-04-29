@@ -1,8 +1,12 @@
+import { useDispatch } from 'react-redux'
+import { filterChange } from '../reducers/filterReducer'
+
 const Filter = () => {
-
-
+  const dispatch = useDispatch()
+  
   const handleChange = (event) =>{
     console.log(event)
+      dispatch(filterChange(event.target.value))
   }
   const style = {
     marginBottom: 10
@@ -11,7 +15,7 @@ const Filter = () => {
   return (
     <div style={style}>
         <input type="text" name="filter"
-          onChange={() => handleChange('ALL')} />
+          onChange={handleChange} />
     </div>
   )
 }
