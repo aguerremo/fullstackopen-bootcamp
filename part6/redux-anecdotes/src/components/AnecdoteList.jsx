@@ -8,10 +8,10 @@ const AnecdoteList = () => {
 
  const filteredAnecdotes = filter === ''
     ? anecdotes
-    : anecdotes.filter(anecdote => anecdote.content.toLowerCase().includes(filter.toLowerCase()))
+    : anecdotes.filter(anecdote => anecdote.content.includes(filter))
   
     return <div>
-      {filteredAnecdotes.sort((a,b) => b.votes - a.votes)
+      {[...filteredAnecdotes].sort((a,b) => b.votes - a.votes)
       .map(anecdote =>
         <div key={anecdote.id}>
             {anecdote.content} has {anecdote.votes} <VoteButton anecdote={anecdote}/>
