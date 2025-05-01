@@ -32,8 +32,13 @@
     },
     {
       "content": "Prueba",
-      "votes": 0,
+      "votes": 3,
       "id": "E83EutO"
+    },
+    {
+      "content": "Prueba test 2",
+      "votes": 4,
+      "id": "cULZ3AZ"
     }
   ]
 }

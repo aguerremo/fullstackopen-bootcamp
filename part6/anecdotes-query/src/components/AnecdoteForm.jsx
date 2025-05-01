@@ -1,9 +1,9 @@
 import { useMutation, useQueryClient, useQuery } from '@tanstack/react-query'
 import { createAnecdote } from '../requests/requests'
 
-
-
 const AnecdoteForm = () => {
+
+  const queryClient = useQueryClient()
 
   const newAnecdoteMutation = useMutation({ 
     mutationFn: createAnecdote, 
@@ -11,9 +11,6 @@ const AnecdoteForm = () => {
       queryClient.invalidateQueries({ queryKey: ['anecdotes'] }
     )}
   })
-
-  const queryClient = useQueryClient()
-
 
   if(newAnecdoteMutation.length < 5){
 
