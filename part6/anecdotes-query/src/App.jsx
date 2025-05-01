@@ -1,7 +1,7 @@
 import AnecdoteForm from './components/AnecdoteForm'
 import Notification from './components/Notification'
 import { useQuery } from '@tanstack/react-query'
-import { getAnecdotes, createAnecdote } from './requests/requests'
+import { getAnecdotes } from './requests/requests'
 
 const App = () => {
 
@@ -23,6 +23,7 @@ const App = () => {
   if (result.isError) {
     return <span>anecdote service is not available due to problems in server</span>
   }
+  
 
   const anecdotes = result.data
 
