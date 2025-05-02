@@ -2,6 +2,7 @@ import VoteButton from "./VoteButton"
 import { useQuery } from '@tanstack/react-query'
 import { getAnecdotes } from '../requests/requests'
 
+
 const AnecdoteList = () => {
 
   const result = useQuery({
