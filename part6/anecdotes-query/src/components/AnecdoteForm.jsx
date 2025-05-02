@@ -22,7 +22,7 @@ const AnecdoteForm = () => {
 
       if(content.length < 5){
         event.target.anecdote.value = ''
-        setNotification(notificationDispatch, 'The anecdote need minimun 5 characthers', 5)
+        setNotification(notificationDispatch, 'The anecdote need minimun 5 characters', 5)
     
       } else {
         console.log('event length: ', event.content)
