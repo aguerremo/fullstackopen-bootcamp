@@ -40,8 +40,8 @@ const App = () => {
       id: 2
     }
   ])
-
   const [notification, setNotification] = useState('')
+
 
   const padding = {
     paddingRight: 5
@@ -78,9 +78,9 @@ const App = () => {
 
   <Routes>
     <Route path="/anecdotes/:id" element={<Anecdote anecdotes={anecdotes} />} />
-    <Route path="/new" element={ <CreateNew addNew={addNew} />} />
+    <Route path="/new" element={ <CreateNew addNew={addNew} setNotification={setNotification} />} />
     <Route path="/users" element={<About />} />
-    <Route path="/" element={<AnecdoteList anecdotes={anecdotes} />} />
+    <Route path="/" element={<AnecdoteList anecdotes={anecdotes} notification={notification} />} />
   </Routes>
 
   <div>
