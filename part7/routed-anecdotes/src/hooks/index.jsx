@@ -8,10 +8,18 @@ export const useField = (type) => {
     setValue(event.target.value)
   }
 
+  const zero = () => {
+    setValue('')
+  }
+
   return {
+    props:{
     type,
     value,
     onChange
+    },
+
+    zero
   }
 }
 
