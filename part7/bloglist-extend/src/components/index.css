@@ -1,0 +1,27 @@
+div {
+  color: rgb(29, 29, 29);
+  padding-top: 3px;
+  font-size: 19px;
+}
+
+.done {
+  color: green;
+  max-width: fit-content;
+  background: lightgrey;
+  font-size: 18px;
+  border-style: solid;
+  border-radius: 20px;
+  padding: 10px;
+  margin-bottom: 10px;
+}
+
+.error {
+  color: red;
+  max-width: fit-content;
+  background: lightgrey;
+  font-size: 18px;
+  border-style: solid;
+  border-radius: 20px;
+  padding: 10px;
+  margin-bottom: 10px;
+}
