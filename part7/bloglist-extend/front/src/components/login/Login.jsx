@@ -1,13 +1,15 @@
 import loginService from '../../services/login'
 import blogService from '../../services/blogs'
-import { Notifications } from '../notifications/Notifications'
 import LoginForm from './LoginForm'
 import { useState } from 'react'
+import { setNotification } from '../../redux/notificationActions'
+import { useDispatch } from 'react-redux'
+import { Notifications } from '../notifications/Notifications'
 
 export const Login = ({ setUser }) => {
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
-  const [errorMessage, setErrorMessage] = useState(null)
+  const dispatch = useDispatch()
 
   const handleLogin = async (event) => {
     event.preventDefault()
@@ -24,19 +26,15 @@ export const Login = ({ setUser }) => {
       setUsername('')
       setPassword('')
     } catch (error) {
-      setErrorMessage('Wrong credentials')
+      dispatch(setNotification(`Wrong credentials. ${error.message}`, 'error', 5))
       console.log('Wrong Credentials')
-      console.log(errorMessage)
+
     }
   }
   return (
     <div>
       <h2>Log in</h2>
-      <Notifications
-        setErrorMessage={setErrorMessage}
-        errorMessage={errorMessage}
-        doneMessage={null}
-      />
+      <Notifications/>
       <LoginForm
         handleLogin={handleLogin}
         setPassword={setPassword}
@@ -44,8 +42,6 @@ export const Login = ({ setUser }) => {
         username={username}
         password={password}
         setUser={setUser}
-        setErrorMessage={setErrorMessage}
-        errorMessage={errorMessage}
       />
     </div>
   )
