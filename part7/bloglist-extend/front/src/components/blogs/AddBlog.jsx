@@ -5,35 +5,28 @@ import { useState, useRef } from 'react'
 import { setNotification } from '../../redux/notificationActions'
 import { useDispatch } from 'react-redux'
 import { Notifications } from '../notifications/Notifications'
+import { createBlogs, initialBlogs } from '../../redux/blogsActions'
 
 
-export const AddBlog = ({ setBlogs }) => {
+export const AddBlog = () => {
   const dispatch = useDispatch()
-
-  const [newBlog, setNewBlog] = useState({
-    author: '',
-    title: '',
-    url: '',
-  })
 
   const togglableRef = useRef()
 
   const addNewBlog = async (event) => {
-    event.preventDefault()
-    console.log('enviando: ', newBlog)
+    const newBlog = {
+      author: event.author,
+      title: event.title,
+      url: event.url,
+      likes: 0,
+    }
     try {
-      const blog = await blogService.create({
-        author: newBlog.author,
-        title: newBlog.title,
-        url: newBlog.url,
-        likes: 0,
-      })
-      console.log('success!', blog)
-      setNewBlog({ author: '', title: '', url: '' })
+      event.preventDefault()
+      console.log('enviando: ', newBlog)
+      dispatch(createBlogs(newBlog))
+      console.log('success!', newBlog)
       togglableRef.current.toggleVisible()
-      const blogs = await blogService.getAll()
-      console.log('Blogs: ', blogs)
-      setBlogs(blogs)
+      dispatch(initialBlogs())
       dispatch(setNotification(`Blog "${newBlog.title}" created successfully`,'success',6))
     } catch (error) {
       console.log('Error', error.response ? error.response.data : error.message)
@@ -49,7 +42,7 @@ export const AddBlog = ({ setBlogs }) => {
         <h3>Add a new blog</h3>
 
         <form onSubmit={addNewBlog}>
-          <InputButton newBlog={newBlog} setNewBlog={setNewBlog} />
+          <InputButton />
           <button type="submit">Submit</button>
         </form>
       </Togglable>
