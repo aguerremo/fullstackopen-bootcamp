@@ -6,12 +6,7 @@ import { AddBlog } from './components/blogs/AddBlog'
 import { Logout } from './components/login/Logout'
 
 const App = () => {
-  const [blogs, setBlogs] = useState([])
   const [user, setUser] = useState(null)
-
-  useEffect(() => {
-    blogService.getAll().then((blogs) => setBlogs(blogs))
-  }, [])
 
   useEffect(() => {
     const loggedUserJSON = window.localStorage.getItem('loggedBlogappUser')
@@ -34,10 +29,10 @@ const App = () => {
           <Logout user={user} setUser={setUser} />
           <br />
           <hr />
-          <AddBlog setBlogs={setBlogs} />
+          <AddBlog />
           <br />
           <hr />
-          <BlogList blogs={blogs} setBlogs={setBlogs} user={user} />
+          <BlogList user={user} />
         </div>
       )}
     </div>

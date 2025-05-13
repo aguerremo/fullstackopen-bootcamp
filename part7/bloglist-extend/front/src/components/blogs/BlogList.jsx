@@ -1,6 +1,15 @@
+import { useDispatch, useSelector } from 'react-redux'
 import Blog from './Blog'
+import { useEffect } from 'react'
+import { initialBlogs } from '../../redux/blogsActions'
 
-const BlogList = ({ blogs, user, setBlogs }) => {
+const BlogList = ({ user, setBlogs }) => {
+  const dispatch = useDispatch()
+  const blogs = useSelector(state => state.blogs)
+
+  useEffect(() => {
+    dispatch(initialBlogs())
+  }, [dispatch])
   return (
     <div>
       <h3>Blog list:</h3>
