@@ -3,9 +3,6 @@ const Blog = require('../models/Blog')
 const User = require('../models/User')
 const jwt = require('jsonwebtoken')
 
-//KzdxnB4t59VO9MZ6
-//Actualizar el put, para que al hacer put se actualice solo los likes, 
-// ya que actualmente no actualizamos otra cosa.
 
 blogsRouter.get('/', async (request, response, next) => {
   try{
@@ -107,6 +104,25 @@ try {
 } catch (error) {
   next(error)
 }
+})
+
+blogsRouter.post('/:id/comments', async (request, response, next) => {
+  const { id } = request.params
+  const { comment } = request.body
+  
+  try {
+    const blog = await Blog.findById(id)
+    if (!blog) {
+      return response.status(404).json({ error: 'Blog not found' })
+    }
+
+    blog.comments = blog.comments.concat(comment)
+    const updatedBlog = await blog.save()
+
+    response.status(201).json(updatedBlog)
+  } catch (error) {
+    next(error)
+  }
 })
 
 module.exports = blogsRouter

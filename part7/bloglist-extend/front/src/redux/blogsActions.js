@@ -60,3 +60,14 @@ export const updateBlog = (updatedBlog) => {
     }
   }
 }
+
+export const addComment = (id, comment) => {
+  return async (dispatch) => {
+    try {
+      const updatedBlog = await blogsService.addComment(id, comment)
+      dispatch(updateBlog(updatedBlog)) // Actualiza el blog en el estado global
+    } catch (error) {
+      console.error('Error adding comment:', error)
+    }
+  }
+}

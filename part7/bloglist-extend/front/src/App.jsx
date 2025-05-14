@@ -4,8 +4,16 @@ import Blogs from './Blogs'
 import { BlogDetails } from './components/blogs/BlogDetails'
 import UsersList from './components/users/UsersList'
 import UserDetails from './components/users/UserDetail'
+import { useDispatch } from 'react-redux'
+import { useEffect } from 'react'
+import { initialBlogs } from './redux/blogsActions'
 
 const App = () => {
+  const dispatch = useDispatch()
+
+  useEffect(() => {
+    dispatch(initialBlogs()) // Carga los blogs al inicializar la aplicación
+  }, [dispatch])
   const styles = {
     padding: 5,
   }
