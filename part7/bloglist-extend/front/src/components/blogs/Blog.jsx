@@ -1,6 +1,7 @@
 import Togglable from '../Togglable'
 import Likes from './LikeButton'
 import Remove from './RemoveBlog'
+import { Link } from 'react-router'
 
 const Blog = ({ blog, user }) => {
   const blogStyle = {
@@ -13,26 +14,18 @@ const Blog = ({ blog, user }) => {
     gap: '10px',
   }
 
-  const blogToShow = () => {
-    return (
-      <div>
-        <em>Author:</em> {blog.author}
-        <br />
-        <em>URL:</em> {blog.url}
-      </div>
-    )
-  }
+  console.log('blog:', blog)
+  console.log('blog.id:', blog.id)
+
 
   return (
     <div style={blogStyle} className="blog" data-testid="blog">
-      <strong>{blog.title}</strong>
-      <Togglable buttonToShow={'more info'} buttonToHide={'close'}>
-        {blogToShow()}
-      </Togglable>
+      <Link to={`/blogs/${blog.id}`}>
+        <strong>{blog.title}</strong>
+        <Likes blog={blog}/>
+        <Remove user={user} blog={blog} />
+      </Link>
 
-      <Likes blog={blog}/>
-
-      <Remove user={user} blog={blog} />
     </div>
   )
 }
