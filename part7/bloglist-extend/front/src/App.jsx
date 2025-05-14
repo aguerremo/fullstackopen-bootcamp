@@ -1,40 +1,33 @@
-import { useState, useEffect } from 'react'
-import BlogList from './components/blogs/BlogList'
-import blogService from './services/blogs'
-import { Login } from './components/login/Login'
-import { AddBlog } from './components/blogs/AddBlog'
-import { Logout } from './components/login/Logout'
+import Blogs from './Blogs'
+import Users from './Users'
+import { BrowserRouter, Link, Route, Routes } from 'react-router'
+
+const Home = () => <h1>Home Page</h1>
+
+const Blog = () => <h1>Blog Page</h1>
+
+const User = () => <h1>User Page</h1>
 
 const App = () => {
-  const [user, setUser] = useState(null)
 
-  useEffect(() => {
-    const loggedUserJSON = window.localStorage.getItem('loggedBlogappUser')
-    if (loggedUserJSON) {
-      const user = JSON.parse(loggedUserJSON)
-      setUser(user)
-      blogService.setToken(user.token)
-    }
-  }, [])
+  const styles = {
+    padding: 5
+  }
 
-  return (
-    <div>
-      {user === null ? (
-        <Login setUser={setUser} />
-      ) : (
-        <div>
-          <h1>Blogs</h1>
-          <Logout user={user} setUser={setUser} />
-          <br />
-          <hr />
-          <AddBlog />
-          <br />
-          <hr />
-          <BlogList user={user} />
-        </div>
-      )}
-    </div>
-  )
+  return <BrowserRouter>
+    <header>
+      <Link to='/' style={styles}>Home</Link>
+      <Link to='/blogs' style={styles}>Blogs</Link>
+      <Link to='/users' style={styles}>Users</Link>
+    </header>
+    <Routes>
+      <Route path='/' element={<Home/>} />
+      <Route path='/blogs' element={<Blogs/>} />
+      <Route path='/users' element={<Users/>} />
+    </Routes>
+  </BrowserRouter>
 }
 
+
 export default App
+
