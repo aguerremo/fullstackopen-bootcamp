@@ -2,6 +2,8 @@ import { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { Link } from 'react-router'
 import { initialUsers } from '../../redux/usersActions'
+import { Table } from '../style/Table'
+import { Paragraph, Subtitle, Title } from '../style/Text'
 
 const UsersList = () => {
   const dispatch = useDispatch()
@@ -17,25 +19,25 @@ const UsersList = () => {
 
   return (
     <div>
-      <h1>Users</h1>
-      <table>
+      <Title>Users</Title>
+      <Table>
         <thead>
           <tr>
-            <th>Name</th>
-            <th>Blogs Created</th>
+            <Subtitle>Name</Subtitle>
+            <Subtitle>Blogs Created</Subtitle>
           </tr>
         </thead>
         <tbody>
           {users.map((user) => (
             <tr key={user.id}>
               <td>
-                <Link to={`/users/${user.id}`}>{user.name}</Link>
+                <Link to={`/users/${user.id}`}><Paragraph>{user.name}</Paragraph></Link>
               </td>
-              <td>{user.blogs.length}</td>
+              <td><Paragraph>{user.blogs.length}</Paragraph></td>
             </tr>
           ))}
         </tbody>
-      </table>
+      </Table>
     </div>
   )
 }

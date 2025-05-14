@@ -1,5 +1,7 @@
 import { useDispatch } from 'react-redux'
 import { updateBlog } from '../../redux/blogsActions'
+import { Button } from '../style/Button'
+import { Paragraph } from '../style/Text'
 
 const Likes = ({ blog }) => {
   const dispatch = useDispatch()
@@ -13,8 +15,8 @@ const Likes = ({ blog }) => {
 
   return (
     <div>
-      <em>Likes:</em> {blog.likes} {}
-      <button onClick={handleClick}>❤</button>
+      <Paragraph>Likes: {blog.likes}</Paragraph>
+      <Button onClick={handleClick}>❤</Button>
     </div>
   )
 }

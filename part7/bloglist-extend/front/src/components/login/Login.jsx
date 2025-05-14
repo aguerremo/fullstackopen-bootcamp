@@ -1,12 +1,13 @@
 import loginService from '../../services/login'
 import blogService from '../../services/blogs'
-import LoginForm from './LoginForm'
 import { useState } from 'react'
 import { setNotification } from '../../redux/notificationActions'
 import { useDispatch } from 'react-redux'
 import { Notifications } from '../notifications/Notifications'
 import { loginUser } from '../../redux/loginActions'
 import { useField } from '../../hooks/hooks'
+import { Subtitle } from '../style/Text'
+import { Button } from '../style/Button'
 
 export const Login = ({ setUser }) => {
   const { reset: resetUsername, ...username } = useField('text')
@@ -35,7 +36,7 @@ export const Login = ({ setUser }) => {
   }
   return (
     <div>
-      <h2>Log in</h2>
+      <Subtitle>Log in</Subtitle>
       <Notifications/>
       <form onSubmit={handleLogin}>
         <div>
@@ -56,7 +57,7 @@ export const Login = ({ setUser }) => {
             placeholder="Password"
           />
         </div>
-        <button>Login</button>
+        <Button>Login</Button>
       </form>
     </div>
   )

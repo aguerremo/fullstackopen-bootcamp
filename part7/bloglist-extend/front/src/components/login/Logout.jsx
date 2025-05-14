@@ -1,3 +1,6 @@
+import { Button } from '../style/Button'
+import { Paragraph } from '../style/Text'
+
 export const Logout = ({ user, setUser }) => {
   const handleLogout = () => {
     window.localStorage.clear()
@@ -5,9 +8,9 @@ export const Logout = ({ user, setUser }) => {
   }
 
   return (
-    <div>
+    <Paragraph>
       {user.name} has been logged <br />
-      <button onClick={handleLogout}>Logout</button>
-    </div>
+      <Button onClick={handleLogout}>Logout</Button>
+    </Paragraph>
   )
 }

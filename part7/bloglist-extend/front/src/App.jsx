@@ -1,6 +1,6 @@
 import { BrowserRouter, Routes, Route, Link } from 'react-router'
 import Blogs from './Blogs'
-
+import { Header } from './components/style/Header'
 import { BlogDetails } from './components/blogs/BlogDetails'
 import UsersList from './components/users/UsersList'
 import UserDetails from './components/users/UserDetail'
@@ -20,10 +20,10 @@ const App = () => {
 
   return (
     <BrowserRouter>
-      <header>
+      <Header>
         <Link to="/" style={styles}>Blogs</Link>
         <Link to="/users" style={styles}>Users</Link>
-      </header>
+      </Header>
       <Routes>
         <Route path="/" element={<Blogs />} />
         <Route path="/blogs/:id" element={<BlogDetails />} />

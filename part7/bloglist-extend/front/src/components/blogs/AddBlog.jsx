@@ -5,6 +5,8 @@ import { useDispatch } from 'react-redux'
 import { Notifications } from '../notifications/Notifications'
 import { createBlogs, initialBlogs } from '../../redux/blogsActions'
 import { useField } from '../../hooks/hooks'
+import { Button } from '../style/Button'
+import { Paragraph, Subtitle } from '../style/Text'
 
 
 export const AddBlog = () => {
@@ -44,10 +46,10 @@ export const AddBlog = () => {
     <div>
       <Notifications />
       <Togglable buttonToShow={'Create Blog'} buttonToHide={'Cancel'} ref={togglableRef}>
-        <h3>Add a new blog</h3>
+        <Subtitle>Add a new blog</Subtitle>
 
         <form onSubmit={addNewBlog}>
-          <div>
+          <Paragraph>
             Author:{' '}
             <input
               {...author}
@@ -66,8 +68,8 @@ export const AddBlog = () => {
               placeholder="write url here"
             />{' '}
             <br />
-          </div>
-          <button type="submit">Submit</button>
+          </Paragraph>
+          <Button type="submit">Submit</Button>
         </form>
       </Togglable>
     </div>

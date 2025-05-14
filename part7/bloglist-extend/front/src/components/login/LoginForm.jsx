@@ -1,3 +1,5 @@
+import { Button } from "../style/Button";
+
 export default function LoginForm({ setPassword, setUsername, handleLogin, username, password }) {
   return (
     <form onSubmit={handleLogin}>
@@ -21,7 +23,7 @@ export default function LoginForm({ setPassword, setUsername, handleLogin, usern
           onChange={({ target }) => setPassword(target.value)}
         />
       </div>
-      <button>Login</button>
+      <Button>Login</Button>
     </form>
   )
 }

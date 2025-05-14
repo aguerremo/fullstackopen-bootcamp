@@ -2,6 +2,8 @@ import { useDispatch, useSelector } from 'react-redux'
 import Blog from './Blog'
 import { useEffect } from 'react'
 import { initialBlogs } from '../../redux/blogsActions'
+import { Title, Subtitle, Paragraph } from '../style/Text'
+
 
 const BlogList = ({ user, setBlogs }) => {
   const dispatch = useDispatch()
@@ -13,12 +15,14 @@ const BlogList = ({ user, setBlogs }) => {
 
   return (
     <div>
-      <h3>Blog list:</h3>
-      {[...blogs] // Crea una copia del array blogs
+      <Subtitle>Blog list:</Subtitle>
+      {[...blogs]
         .sort((a, b) => b.likes - a.likes)
         .map((blog) => (
           <div key={blog.id}>
-            <Blog blog={blog} setBlogs={setBlogs} user={user} />
+            <Paragraph>
+              <Blog blog={blog} setBlogs={setBlogs} user={user} />
+            </Paragraph>
           </div>
         ))}
     </div>

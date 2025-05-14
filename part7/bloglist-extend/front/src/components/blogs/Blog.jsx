@@ -22,9 +22,9 @@ const Blog = ({ blog, user }) => {
     <div style={blogStyle} className="blog" data-testid="blog">
       <Link to={`/blogs/${blog.id}`}>
         <strong>{blog.title}</strong>
-        <Likes blog={blog}/>
-        <Remove user={user} blog={blog} />
       </Link>
+      <Likes blog={blog}/>
+      <Remove user={user} blog={blog} />
 
     </div>
   )

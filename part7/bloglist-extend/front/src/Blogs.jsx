@@ -4,6 +4,7 @@ import blogService from './services/blogs'
 import { Login } from './components/login/Login'
 import { AddBlog } from './components/blogs/AddBlog'
 import { Logout } from './components/login/Logout'
+import { Title } from './components/style/Text'
 
 const App = () => {
   const [user, setUser] = useState(null)
@@ -23,7 +24,7 @@ const App = () => {
         <Login setUser={setUser} />
       ) : (
         <div>
-          <h1>Blogs</h1>
+          <Title>Blogs</Title>
           <Logout user={user} setUser={setUser} />
           <br />
           <hr />

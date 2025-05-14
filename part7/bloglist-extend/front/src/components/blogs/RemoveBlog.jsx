@@ -2,6 +2,7 @@ import blogService from '../../services/blogs'
 import { setNotification } from '../../redux/notificationActions'
 import { useDispatch } from 'react-redux'
 import { removeBlog } from '../../redux/blogsActions'
+import { Button } from '../style/Button'
 
 const Remove = ({ user, blog }) => {
   const dispatch = useDispatch()
@@ -21,7 +22,7 @@ const Remove = ({ user, blog }) => {
     return null // no mostrar botón si no es el mismo usuario
   }
 
-  return <button onClick={handleRemove}>Remove Blog</button>
+  return <Button onClick={handleRemove}>Remove Blog</Button>
 }
 
 export default Remove
