@@ -1,23 +1,19 @@
-import blogService from '../../services/blogs'
-import { useState } from 'react'
+import { useDispatch } from 'react-redux'
+import { updateBlog } from '../../redux/blogsActions'
 
-const Likes = ({ id, likes, addLike }) => {
-  const [newlikes, setNewLikes] = useState(likes)
+const Likes = ({ blog }) => {
+  const dispatch = useDispatch()
 
-  const handleClick = async (event) => {
-    event.preventDefault()
-    setNewLikes(newlikes + 1)
-    if (addLike) {
-      addLike()
-    } else {
-      const like = await blogService.update(id, { likes: newlikes + 1 })
-      console.log('succes!', like)
-    }
+  const handleClick = () => {
+    const updatedBlog = { ...blog, likes: blog.likes +1 }
+    dispatch(updateBlog(updatedBlog))
+    console.log('succes!', updatedBlog)
   }
+
 
   return (
     <div>
-      <em>Likes:</em> {newlikes} {}
+      <em>Likes:</em> {blog.likes} {}
       <button onClick={handleClick}>❤</button>
     </div>
   )

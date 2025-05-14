@@ -12,14 +12,9 @@ const Remove = ({ user, blog }) => {
   const userId = user.id
   const blogUserId = blog.user.id
 
-  const handleRemove = async (event) => {
-    event.preventDefault()
-    try {
-      dispatch(removeBlog(blog.id))
-      dispatch(setNotification(blog.title + ' removed successfully', 'success',6))
-    } catch (error) {
-      console.log('Error: ', error)
-    }
+  const handleRemove = () => {
+    dispatch(removeBlog(blog))
+    dispatch(setNotification(blog.title + ' removed successfully', 'success',6))
   }
 
   if (userId !== blogUserId) {

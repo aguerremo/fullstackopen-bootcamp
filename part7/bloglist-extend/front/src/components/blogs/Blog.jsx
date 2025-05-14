@@ -2,7 +2,7 @@ import Togglable from '../Togglable'
 import Likes from './LikeButton'
 import Remove from './RemoveBlog'
 
-const Blog = ({ blog, setBlogs, user }) => {
+const Blog = ({ blog, user }) => {
   const blogStyle = {
     paddingTop: 10,
     paddingLeft: 2,
@@ -30,7 +30,7 @@ const Blog = ({ blog, setBlogs, user }) => {
         {blogToShow()}
       </Togglable>
 
-      <Likes id={blog.id} likes={blog.likes} />
+      <Likes blog={blog}/>
 
       <Remove user={user} blog={blog} />
     </div>
