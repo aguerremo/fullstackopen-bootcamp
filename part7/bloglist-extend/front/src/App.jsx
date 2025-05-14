@@ -17,8 +17,6 @@ const App = () => {
     }
   }, [])
 
-  // console.log('user token at App:', user.token)
-
   return (
     <div>
       {user === null ? (

@@ -10,10 +10,11 @@ const BlogList = ({ user, setBlogs }) => {
   useEffect(() => {
     dispatch(initialBlogs())
   }, [dispatch])
+
   return (
     <div>
       <h3>Blog list:</h3>
-      {blogs
+      {[...blogs] // Crea una copia del array blogs
         .sort((a, b) => b.likes - a.likes)
         .map((blog) => (
           <div key={blog.id}>

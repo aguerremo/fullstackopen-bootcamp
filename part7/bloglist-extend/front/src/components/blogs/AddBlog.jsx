@@ -1,23 +1,25 @@
-import { InputButton } from './InputButton'
-import blogService from '../../services/blogs'
 import Togglable from '../Togglable'
-import { useState, useRef } from 'react'
+import { useRef } from 'react'
 import { setNotification } from '../../redux/notificationActions'
 import { useDispatch } from 'react-redux'
 import { Notifications } from '../notifications/Notifications'
 import { createBlogs, initialBlogs } from '../../redux/blogsActions'
+import { useField } from '../../hooks/hooks'
 
 
 export const AddBlog = () => {
+  const { reset: resetTitle, ...title } = useField('text')
+  const { reset: resetAuthor, ...author } = useField('text')
+  const { reset: resetUrl, ...url } = useField('text')
   const dispatch = useDispatch()
 
   const togglableRef = useRef()
 
   const addNewBlog = async (event) => {
     const newBlog = {
-      author: event.author,
-      title: event.title,
-      url: event.url,
+      author: author.value,
+      title: title.value,
+      url: url.value,
       likes: 0,
     }
     try {
@@ -42,7 +44,26 @@ export const AddBlog = () => {
         <h3>Add a new blog</h3>
 
         <form onSubmit={addNewBlog}>
-          <InputButton />
+          <div>
+            Author:{' '}
+            <input
+              {...author}
+              placeholder="write author name here"
+            />{' '}
+            <br />
+            Title:{' '}
+            <input
+              {...title}
+              placeholder="write blog title here"
+            />{' '}
+            <br />
+            URL:{' '}
+            <input
+              {...url}
+              placeholder="write url here"
+            />{' '}
+            <br />
+          </div>
           <button type="submit">Submit</button>
         </form>
       </Togglable>

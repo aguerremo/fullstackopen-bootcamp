@@ -32,7 +32,7 @@ const Blog = ({ blog, setBlogs, user }) => {
 
       <Likes id={blog.id} likes={blog.likes} />
 
-      <Remove setBlogs={setBlogs} user={user} blog={blog} />
+      <Remove user={user} blog={blog} />
     </div>
   )
 }

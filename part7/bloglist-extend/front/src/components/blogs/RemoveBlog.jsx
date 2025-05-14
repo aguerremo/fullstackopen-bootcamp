@@ -1,9 +1,9 @@
 import blogService from '../../services/blogs'
 import { setNotification } from '../../redux/notificationActions'
 import { useDispatch } from 'react-redux'
-import { Notifications } from '../notifications/Notifications'
+import { removeBlog } from '../../redux/blogsActions'
 
-const Remove = ({ setBlogs, user, blog }) => {
+const Remove = ({ user, blog }) => {
   const dispatch = useDispatch()
   if (!user || !blog.user) {
     return null // no renderizar nada si falta información
@@ -12,11 +12,10 @@ const Remove = ({ setBlogs, user, blog }) => {
   const userId = user.id
   const blogUserId = blog.user.id
 
-  const removeBlog = async (event) => {
+  const handleRemove = async (event) => {
     event.preventDefault()
     try {
-      await blogService.remove(blog.id)
-      setBlogs((prevBlogs) => prevBlogs.filter((b) => b.id !== blog.id))
+      dispatch(removeBlog(blog.id))
       dispatch(setNotification(blog.title + ' removed successfully', 'success',6))
     } catch (error) {
       console.log('Error: ', error)
@@ -27,7 +26,7 @@ const Remove = ({ setBlogs, user, blog }) => {
     return null // no mostrar botón si no es el mismo usuario
   }
 
-  return <button onClick={removeBlog}>Remove Blog</button>
+  return <button onClick={handleRemove}>Remove Blog</button>
 }
 
 export default Remove
