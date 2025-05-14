@@ -30,6 +30,9 @@ export const AddBlog = () => {
       togglableRef.current.toggleVisible()
       dispatch(initialBlogs())
       dispatch(setNotification(`Blog "${newBlog.title}" created successfully`,'success',6))
+      resetAuthor()
+      resetTitle()
+      resetUrl()
     } catch (error) {
       console.log('Error', error.response ? error.response.data : error.message)
       dispatch(setNotification(`Error creating blog: ${error.message}`, 'error', 5))

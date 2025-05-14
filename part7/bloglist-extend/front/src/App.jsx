@@ -1,36 +1,30 @@
+import { BrowserRouter, Routes, Route, Link } from 'react-router'
 import Blogs from './Blogs'
-import Blog from './components/blogs/Blog'
+
 import { BlogDetails } from './components/blogs/BlogDetails'
-import Users from './Users'
-import { BrowserRouter, Link, Route, Routes } from 'react-router'
-
-const Home = () => <h1>Home Page</h1>
-
-const User = () => <h1>User Page</h1>
+import UsersList from './components/users/UsersList'
+import UserDetails from './components/users/UserDetail'
 
 const App = () => {
-
   const styles = {
-    padding: 5
+    padding: 5,
   }
 
-  return <BrowserRouter>
-    <header>
-      <Link to='/' style={styles}>Home</Link>
-      <Link to='/blogs' style={styles}>Blogs</Link>
-      <Link to='/users' style={styles}>Users</Link>
-    </header>
-    <Routes>
-      <Route path='/' element={<Home/>} />
-      <Route path='/blogs' element={<Blogs/>} />
-      <Route path='/blogs/:id' element={<BlogDetails/>} />
-      <Route path='/users' element={<Users/>} />
-      <Route path='/users/:id' element={<User/>} />
-
-    </Routes>
-  </BrowserRouter>
+  return (
+    <BrowserRouter>
+      <header>
+        <Link to="/" style={styles}>Blogs</Link>
+        <Link to="/users" style={styles}>Users</Link>
+      </header>
+      <Routes>
+        <Route path="/" element={<Blogs />} />
+        <Route path="/blogs/:id" element={<BlogDetails />} />
+        <Route path="/users" element={<UsersList />} />
+        <Route path="/users/:id" element={<UserDetails />} />
+      </Routes>
+    </BrowserRouter>
+  )
 }
-
 
 export default App
 

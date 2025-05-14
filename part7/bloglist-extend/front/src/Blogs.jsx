@@ -5,7 +5,7 @@ import { Login } from './components/login/Login'
 import { AddBlog } from './components/blogs/AddBlog'
 import { Logout } from './components/login/Logout'
 
-const Blogs = () => {
+const App = () => {
   const [user, setUser] = useState(null)
 
   useEffect(() => {
@@ -37,4 +37,4 @@ const Blogs = () => {
   )
 }
 
-export default Blogs
+export default App

@@ -1,6 +1,6 @@
 const initialState = null
 
-const userReducer = (state = initialState, action) => {
+const loginReducer = (state = initialState, action) => {
 
   switch (action.type) {
   case 'LOGIN_USER':
@@ -12,4 +12,4 @@ const userReducer = (state = initialState, action) => {
   }
 }
 
-export default userReducer
+export default loginReducer

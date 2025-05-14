@@ -5,7 +5,7 @@ import { useState } from 'react'
 import { setNotification } from '../../redux/notificationActions'
 import { useDispatch } from 'react-redux'
 import { Notifications } from '../notifications/Notifications'
-import { loginUser } from '../../redux/userActions'
+import { loginUser } from '../../redux/loginActions'
 import { useField } from '../../hooks/hooks'
 
 export const Login = ({ setUser }) => {
